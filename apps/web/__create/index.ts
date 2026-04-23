@@ -286,8 +286,11 @@ app.all('/integrations/:path{.+}', async (c, next) => {
 });
 
 app.use('/api/auth/*', async (c, next) => {
-  if (isAuthAction(c.req.path)) {
+  if (process.env.AUTH_SECRET && isAuthAction(c.req.path)) {
     return authHandler()(c, next);
+  }
+  if (isAuthAction(c.req.path)) {
+    return c.json(null, 200);
   }
   return next();
 });

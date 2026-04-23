@@ -19,14 +19,11 @@ export default defineConfig({
   optimizeDeps: {
     // Explicitly include fast-glob, since it gets dynamically imported and we
     // don't want that to cause a re-bundle.
-    include: ['fast-glob', 'lucide-react'],
+    include: ['fast-glob', 'lucide-react', '@hono/auth-js/react', '@auth/core/errors'],
     exclude: [
-      '@hono/auth-js/react',
       '@hono/auth-js',
       '@auth/core',
-      '@hono/auth-js',
       'hono/context-storage',
-      '@auth/core/errors',
       'fsevents',
       'lightningcss',
     ],
@@ -75,7 +72,7 @@ export default defineConfig({
       '@auth/create': path.resolve(__dirname, './src/__create/@auth/create'),
       '@': path.resolve(__dirname, 'src'),
     },
-    dedupe: ['react', 'react-dom'],
+    dedupe: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
   },
   clearScreen: false,
   server: {
