@@ -40,7 +40,7 @@ shared/
 ```
 
 ## Key Configuration
-- **SSR**: enabled (`ssr: true` in react-router.config.ts)
+- **SSR**: disabled (`ssr: false` in react-router.config.ts) — SPA mode to eliminate hydration mismatches
 - **Dev port**: 5000 (workflow: `cd apps/web && bun run dev --port 5000`)
 - **Auth**: guarded by `process.env.AUTH_SECRET` check — returns `null` gracefully if not set
 - **Database**: guarded by `process.env.DATABASE_URL` — Neon Pool created with undefined connection if not set
@@ -52,8 +52,10 @@ shared/
 4. **__create/@auth/create.js** — Fixed auth crash: guarded `AUTH_URL?.startsWith('https') ?? false`
 5. **__create/index.ts** — Fixed ClientFetchError: `/api/auth/*` returns `c.json(null, 200)` when `AUTH_SECRET` is not set
 6. **layout.jsx** — Fixed TanStack Query v5 deprecation: renamed `cacheTime` → `gcTime`
-7. **ThreeBackground.jsx** — Fixed "Error creating WebGL context" crash: wrapped entire Three.js `WebGLRenderer` initialization in try/catch (React 18 propagates `useEffect` errors to error boundaries)
-8. **__create/not-found.tsx** — Created missing 404 route component referenced in routes.ts
+7. **ThreeBackground.jsx** — Fixed "Error creating WebGL context" crash: wrapped entire Three.js `WebGLRenderer` initialization in try/catch
+8. **__create/not-found.tsx** — Created missing 404 route component referenced in routes.ts; then converted from server `loader` to client-only component when SSR was disabled
+9. **react-router.config.ts** — Disabled SSR (`ssr: false`) to eliminate React 18 hydration mismatches and uncaught `window.onerror` events
+10. **entry.client.tsx** — Simplified client entry (no hydration boundary needed in SPA mode)
 
 ## Environment Variables Required for Full Functionality
 - `DATABASE_URL` — Neon DB connection string (app works without it, DB features disabled)

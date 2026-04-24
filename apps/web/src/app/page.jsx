@@ -625,9 +625,10 @@ export default function RealEstatePage() {
               </label>
               <select
                 required
+                defaultValue=""
                 className="w-full bg-[#0A1929] border border-white/10 rounded-2xl px-5 py-4 text-white focus:border-emerald-500 outline-none transition-all appearance-none cursor-pointer"
               >
-                <option value="" disabled selected>
+                <option value="" disabled>
                   Select Interest
                 </option>
                 <option>4-Bed Semi-Detached Duplex</option>
