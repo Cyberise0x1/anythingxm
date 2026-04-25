@@ -41,7 +41,7 @@ if (globalThis.window && globalThis.window !== undefined) {
   globalThis.window.fetch = fetch;
 }
 
-const LoadFontsSSR = import.meta.env.SSR && !import.meta.env.DEV ? LoadFonts : null;
+const LoadFontsForProd = !import.meta.env.DEV ? LoadFonts : null;
 if (import.meta.hot) {
   import.meta.hot.on('update-font-links', (urls: string[]) => {
     // remove old font links
@@ -434,14 +434,18 @@ export function Layout({ children }: { children: ReactNode }) {
   }, [pathname]);
   return (
     <html lang="en">
-      <head suppressHydrationWarning>
+      <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Links />
         <Meta />
-        <script type="module" src="/src/__create/dev-error-overlay.js"></script>
+        <script
+          type="module"
+          src="/src/__create/dev-error-overlay.js"
+          suppressHydrationWarning
+        />
         <link rel="icon" href="/src/__create/favicon.png" />
-        {LoadFontsSSR ? <LoadFontsSSR /> : null}
+        {LoadFontsForProd ? <LoadFontsForProd /> : null}
       </head>
       <body>
         <ErrorBoundaryWrapper>
