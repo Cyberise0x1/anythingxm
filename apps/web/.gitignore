@@ -4,3 +4,7 @@
 # React Router
 /.react-router/
 /build/
+
+# Playwright browser binaries downloaded for scripts/check-pages.mjs
+/.playwright-browsers/
+/.vitest/
