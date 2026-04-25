@@ -65,7 +65,13 @@ function InternalErrorBoundary({ error: errorArg }: Route.ErrorBoundaryProps) {
   const asyncError = useAsyncError();
   const error = errorArg ?? asyncError ?? routeError;
   const [isOpen, setIsOpen] = useState(false);
-  const shouldScale = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+  const [shouldScale, setShouldScale] = useState(false);
+  useEffect(() => {
+    const update = () => setShouldScale(window.innerWidth < 768);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
   const scaleFactor = shouldScale ? 1.02 : 1;
   const copyButtonTextClass = shouldScale ? 'text-sm' : 'text-xs';
   const copyButtonPaddingClass = shouldScale ? 'px-[10px] py-[5px]' : 'px-[6px] py-[3px]';
@@ -382,7 +388,26 @@ export function Layout({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location?.pathname;
-  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+  const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+    const update = () => setIsMobile(window.innerWidth < 768);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+  useEffect(() => {
+    if (!mounted) return;
+    const id = 'fontawesome-kit-script';
+    if (document.getElementById(id)) return;
+    const script = document.createElement('script');
+    script.id = id;
+    script.src = 'https://kit.fontawesome.com/2c15cc0cc7.js';
+    script.crossOrigin = 'anonymous';
+    script.async = true;
+    document.body.appendChild(script);
+  }, [mounted]);
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       if (event.data.type === 'sandbox:navigation') {
@@ -422,10 +447,9 @@ export function Layout({ children }: { children: ReactNode }) {
         <ErrorBoundaryWrapper>
           {children}
         </ErrorBoundaryWrapper>
-        <Toaster position={isMobile ? 'top-center' : 'bottom-right'} />
+        {mounted ? <Toaster position={isMobile ? 'top-center' : 'bottom-right'} /> : null}
         <ScrollRestoration />
         <Scripts />
-        <script src="https://kit.fontawesome.com/2c15cc0cc7.js" crossOrigin="anonymous" async />
       </body>
     </html>
   );
