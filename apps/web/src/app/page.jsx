@@ -20,18 +20,11 @@ import Cursor from "@/components/Cursor";
 import Navbar from "@/components/Navbar";
 import ComingSoonModal from "@/components/ComingSoonModal";
 
-const PROPERTY_PROMPTS = [
-  "Professional architectural photo of a modern 4-bedroom semi-detached duplex, white exterior, large glass windows, wooden door, small balcony with green plants, luxury Nigerian residential, golden hour, clear blue sky, photorealistic",
-  "Professional architectural photo of modern executive terraced townhouses, pristine white facade, floor-to-ceiling glass windows, warm wooden frames, connected units in a row, rooftop greenery, Nigerian luxury real estate, sunset lighting, photorealistic",
-  "Professional architectural photo of an ultra-luxury 6-bedroom smart villa, modern white and glass architecture, large glass panels, LED ambient lighting, tropical landscaping with palm trees, Abuja Nigeria, blue hour evening, photorealistic",
-];
-
-const initialProperties = [
+const properties = [
   {
     id: 1,
     title: "Semi-Detached Duplex",
-    image: null,
-    error: false,
+    gradient: "from-[#0d2137] via-[#122538] to-[#0a1929]",
     tag: "Verified",
     beds: 4,
     location: "Abuja Central",
@@ -42,8 +35,7 @@ const initialProperties = [
   {
     id: 2,
     title: "Executive Terraces",
-    image: null,
-    error: false,
+    gradient: "from-[#0d1f33] via-[#0a2040] to-[#0A1929]",
     tag: "Coming Soon",
     beds: 5,
     location: "Maitama District",
@@ -55,8 +47,7 @@ const initialProperties = [
   {
     id: 3,
     title: "Blockchain Villa",
-    image: null,
-    error: false,
+    gradient: "from-[#0d2137] via-[#0d1f33] to-[#061220]",
     tag: "Tokenized",
     beds: 6,
     location: "Asokoro Layout",
@@ -74,32 +65,7 @@ export default function RealEstatePage() {
   const [loading, setLoading] = useState(true);
   const [loadProgress, setLoadProgress] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
-  const [properties, setProperties] = useState(initialProperties);
   const videoRef = useRef(null);
-
-  const fetchImage = async (index) => {
-    try {
-      const encoded = encodeURIComponent(PROPERTY_PROMPTS[index]);
-      const res = await fetch(`/integrations/dall-e-3/?prompt=${encoded}`);
-      if (!res.ok) throw new Error("Failed");
-      const data = await res.json();
-      const url = data?.data?.[0] || null;
-      setProperties((prev) =>
-        prev.map((p, i) =>
-          i === index ? { ...p, image: url, error: !url } : p,
-        ),
-      );
-    } catch {
-      setProperties((prev) =>
-        prev.map((p, i) => (i === index ? { ...p, error: true } : p)),
-      );
-    }
-  };
-
-  // Fire all 3 image requests in parallel on mount
-  useEffect(() => {
-    Promise.all([fetchImage(0), fetchImage(1), fetchImage(2)]);
-  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -171,15 +137,6 @@ export default function RealEstatePage() {
       videoRef.current.muted = !videoRef.current.muted;
       setIsMuted(videoRef.current.muted);
     }
-  };
-
-  const retryImage = (index) => {
-    setProperties((prev) =>
-      prev.map((p, i) =>
-        i === index ? { ...p, image: null, error: false } : p,
-      ),
-    );
-    fetchImage(index);
   };
 
   return (
@@ -343,36 +300,13 @@ export default function RealEstatePage() {
                 className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[24px] p-6 group hover:border-emerald-500/30 transition-all cursor-pointer"
               >
                 {/* Property Image Area */}
-                <div className="h-48 bg-gradient-to-br from-[#0d2137] to-[#0a1929] rounded-2xl mb-6 border border-white/5 group-hover:border-emerald-500/20 transition-colors overflow-hidden relative">
-                  {prop.image ? (
-                    <>
-                      <img
-                        src={prop.image}
-                        alt={prop.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                    </>
-                  ) : prop.error ? (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                      <p className="text-gray-500 text-xs text-center px-4">
-                        Could not generate image
-                      </p>
-                      <button
-                        onClick={() => retryImage(index)}
-                        className="text-emerald-400 text-xs font-bold border border-emerald-500/30 px-3 py-1 rounded-full hover:bg-emerald-500/10 transition-all"
-                      >
-                        ↻ Retry
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                      <div className="property-spinner" />
-                      <p className="text-gray-500 text-[10px] uppercase tracking-widest font-bold">
-                        Generating...
-                      </p>
-                    </div>
-                  )}
+                <div className={`h-48 bg-gradient-to-br ${prop.gradient} rounded-2xl mb-6 border border-white/5 group-hover:border-emerald-500/20 transition-colors overflow-hidden relative`}>
+                  <div className="absolute inset-0 flex items-end p-4">
+                    <div className="w-full h-[1px] bg-gradient-to-r from-emerald-500/30 via-[#00D4AA]/20 to-transparent" />
+                  </div>
+                  <div className="absolute top-4 right-4 w-8 h-8 rounded-full border border-emerald-500/20 flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-emerald-400/60" />
+                  </div>
                 </div>
 
                 <div className="flex justify-between items-start mb-2">
@@ -694,18 +628,6 @@ export default function RealEstatePage() {
         body { font-family: var(--font-sans); cursor: none; background: transparent; }
         .font-display { font-family: var(--font-display); }
         @media (max-width: 768px) { html, body { cursor: auto; } }
-        @keyframes property-spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .property-spinner {
-          width: 32px;
-          height: 32px;
-          border: 2px solid rgba(16,185,129,0.3);
-          border-top-color: #10b981;
-          border-radius: 50%;
-          animation: property-spin 1s linear infinite;
-        }
       `}</style>
     </main>
   );
