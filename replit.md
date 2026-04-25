@@ -66,3 +66,14 @@ shared/
 - DALL-E 3 images require `NEXT_PUBLIC_PROJECT_GROUP_ID` and Create.xyz credentials
 - The app shows a loading animation for ~1 second on first load
 - Three.js particle background gracefully degrades when WebGL is unavailable
+
+## Smoke check (`bun run check:pages`)
+- `apps/web/scripts/check-pages.mjs` boots a headless Chromium against the dev
+  server (it spawns its own on port 5051 by default; set `CHECK_BASE_URL` to
+  reuse a running one) and validates each route in `ROUTES`.
+- Asserts: (1) no hydration / "Expected server HTML" / unhandled page errors,
+  (2) the dark-navy `#0A1929` background is actually applied on the home page.
+- Run with `bun run check:pages` from `apps/web/`. Exits non-zero on the first
+  failure so it's safe to wire into CI or a pre-commit hook.
+- Browser binaries live under `apps/web/.playwright-browsers/` (gitignored).
+  Re-install with `PLAYWRIGHT_BROWSERS_PATH=$PWD/.playwright-browsers bunx playwright install chromium`.
