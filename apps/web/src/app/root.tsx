@@ -41,7 +41,12 @@ if (globalThis.window && globalThis.window !== undefined) {
   globalThis.window.fetch = fetch;
 }
 
-const LoadFontsForProd = !import.meta.env.DEV ? LoadFonts : null;
+// In production we render the collected font <link> tags on both the server
+// AND the client so the hydrated tree matches the SSR HTML exactly. In dev
+// the font set is managed dynamically by the HMR `update-font-links` handler
+// below (it mutates document.head directly after hydration), so we render
+// nothing here on either side.
+const LoadFontsInProd = import.meta.env.DEV ? null : LoadFonts;
 if (import.meta.hot) {
   import.meta.hot.on('update-font-links', (urls: string[]) => {
     // remove old font links
@@ -445,7 +450,7 @@ export function Layout({ children }: { children: ReactNode }) {
           suppressHydrationWarning
         />
         <link rel="icon" href="/src/__create/favicon.png" />
-        {LoadFontsForProd ? <LoadFontsForProd /> : null}
+        {LoadFontsInProd ? <LoadFontsInProd /> : null}
       </head>
       <body>
         <ErrorBoundaryWrapper>
