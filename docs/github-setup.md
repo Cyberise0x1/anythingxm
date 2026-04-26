@@ -76,29 +76,35 @@ scope. Generate one here:
 Then in the Replit shell of this Repl, run (replacing the placeholders):
 
 ```bash
-# 1. Add your GitHub repo as the `origin` remote
+# 1. Add your GitHub repo as the `origin` remote (no token in the URL).
 git remote add origin https://github.com/<your-account>/<repo-name>.git
 
-# 2. Push the main branch.
-#    When prompted for a username, enter your GitHub username.
-#    When prompted for a password, paste the PAT (NOT your GitHub password).
+# 2. Push the main branch. Git will prompt interactively:
+#      Username: <your GitHub username>
+#      Password: <paste the fine-grained PAT — NOT your GitHub password>
 git push -u origin main
-```
-
-If you prefer to bake the PAT into the remote URL instead of being
-prompted (less secure but convenient for one-off use), do:
-
-```bash
-git remote add origin https://<github-username>:<PAT>@github.com/<your-account>/<repo-name>.git
-git push -u origin main
-# Immediately rotate the PAT or re-set the remote without it once the
-# initial push succeeds:
-git remote set-url origin https://github.com/<your-account>/<repo-name>.git
 ```
 
 > ⚠️ **Never commit the PAT into the repo, paste it into a code file,
-> or share it in chat.** The token grants write access to your
-> repository.
+> bake it into the remote URL, or share it in chat.** The interactive
+> prompt above keeps the token out of `git remote -v`, your shell
+> history, and any committed config.
+
+If you would rather not type the token on every push, use a credential
+helper that stores it in your OS keychain:
+
+```bash
+# macOS
+git config --global credential.helper osxkeychain
+# Linux (GNOME / KDE keyring)
+git config --global credential.helper libsecret
+# Windows
+git config --global credential.helper manager
+```
+
+The first push will still prompt, then subsequent pushes use the stored
+credential. Avoid `--global credential.helper store`, which writes the
+token in plain text to `~/.git-credentials`.
 
 After the push, confirm:
 
