@@ -61,8 +61,9 @@ Use this if you have already created an empty repository on GitHub and
 want to push this Repl into it without going through Replit's
 connector.
 
-You will need a **GitHub Personal Access Token (PAT)** with `repo`
-scope. Generate one here:
+You will need a **GitHub fine-grained Personal Access Token (PAT)**
+scoped to the single repository you will push to, with **Contents:
+Read and write** permission. Generate one here:
 
 1. Visit <https://github.com/settings/personal-access-tokens/new> (or
    *Settings → Developer settings → Personal access tokens →
