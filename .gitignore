@@ -1,0 +1,65 @@
+# --- Dependencies ----------------------------------------------------------
+node_modules/
+apps/*/node_modules/
+
+# --- Build / generated output ---------------------------------------------
+build/
+dist/
+apps/web/build/
+apps/web/.react-router/
+apps/web/.vitest/
+apps/mobile/dist/
+apps/mobile/web-build/
+apps/mobile/.expo/
+apps/mobile/expo-env.d.ts
+
+# --- Caches ----------------------------------------------------------------
+.cache/
+apps/web/.cache/
+apps/web/.playwright-browsers/
+.turbo/
+.parcel-cache/
+.eslintcache
+.next/
+
+# --- Secrets / env ---------------------------------------------------------
+# Ignore every .env variant, but keep example/template files committed
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.template
+apps/*/.env
+apps/*/.env.*
+!apps/*/.env.example
+
+# --- Logs / debug ----------------------------------------------------------
+*.log
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+pnpm-debug.*
+bun-debug.*
+
+# --- Editor / OS -----------------------------------------------------------
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
+
+# --- Replit / agent local state -------------------------------------------
+.local/
+/tmp/
+.replit-cache/
+
+# --- Screenshots and large local-only assets ------------------------------
+attached_assets/screenshots/
+
+# --- Misc archive / scratch files -----------------------------------------
+zipFile.zip
+*.tgz
+*.tar.gz
