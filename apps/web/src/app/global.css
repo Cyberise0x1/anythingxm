@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  html, body {
+    @apply font-sans;
+  }
   input, textarea, select, button {
-    @apply outline-none focus:outline-none;
+    @apply outline-none focus:outline-none font-sans;
   }
 }
