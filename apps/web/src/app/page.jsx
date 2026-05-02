@@ -619,10 +619,9 @@ export default function RealEstatePage() {
       </div>
 
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
         :root {
-          --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-          --font-display: 'Space Grotesk', sans-serif;
+          --font-sans: 'Sora', 'Inter', system-ui, -apple-system, sans-serif;
+          --font-display: 'Sora', 'Inter', system-ui, -apple-system, sans-serif;
         }
         html { background: #0A1929; }
         body { font-family: var(--font-sans); cursor: none; background: transparent; }
