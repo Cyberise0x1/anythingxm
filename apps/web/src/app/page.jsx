@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
 import {
   ChevronDown,
   MapPin,
@@ -15,10 +15,11 @@ import {
 import { motion, AnimatePresence } from "motion/react";
 import { useMutation } from "@tanstack/react-query";
 
-import ThreeBackground from "@/components/ThreeBackground";
 import Cursor from "@/components/Cursor";
 import Navbar from "@/components/Navbar";
-import ComingSoonModal from "@/components/ComingSoonModal";
+
+const ThreeBackground = lazy(() => import("@/components/ThreeBackground"));
+const ComingSoonModal = lazy(() => import("@/components/ComingSoonModal"));
 
 const properties = [
   {
@@ -63,29 +64,15 @@ export default function RealEstatePage() {
   const [isNaira, setIsNaira] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [loadProgress, setLoadProgress] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef(null);
 
   useEffect(() => {
-    const DURATION_MS = 1200;
-    const start = performance.now();
-    let raf = 0;
-    let doneTimer = 0;
-    const tick = (now) => {
-      const pct = Math.min(100, ((now - start) / DURATION_MS) * 100);
-      setLoadProgress(pct);
-      if (pct < 100) {
-        raf = requestAnimationFrame(tick);
-      } else {
-        doneTimer = window.setTimeout(() => setLoading(false), 250);
-      }
-    };
-    raf = requestAnimationFrame(tick);
-    return () => {
-      cancelAnimationFrame(raf);
-      if (doneTimer) clearTimeout(doneTimer);
-    };
+    // Hard safety cap: no matter what, splash hides after 1200ms. The progress
+    // bar is now a pure CSS animation so it cannot get out of sync with React
+    // state during hydration / client re-render.
+    const t = window.setTimeout(() => setLoading(false), 1200);
+    return () => clearTimeout(t);
   }, []);
 
   useEffect(() => {
@@ -160,18 +147,28 @@ export default function RealEstatePage() {
             </h1>
             <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-[#00D4AA] to-[#FFD700]"
-                style={{
-                  width: `${loadProgress}%`,
-                  willChange: "width",
-                }}
+                className="h-full bg-gradient-to-r from-[#00D4AA] to-[#FFD700] xm-splash-fill"
+                style={{ willChange: "transform" }}
               />
             </div>
+            <style>{`
+              @keyframes xm-splash-fill-kf {
+                from { transform: translateX(-100%); }
+                to   { transform: translateX(0%); }
+              }
+              .xm-splash-fill {
+                width: 100%;
+                transform: translateX(-100%);
+                animation: xm-splash-fill-kf 1.1s linear forwards;
+              }
+            `}</style>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <ThreeBackground />
+      <Suspense fallback={null}>
+        <ThreeBackground />
+      </Suspense>
       <Cursor />
 
       <div
@@ -180,10 +177,14 @@ export default function RealEstatePage() {
       />
 
       <Navbar onOpenComingSoon={() => setIsModalOpen(true)} />
-      <ComingSoonModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
+      {isModalOpen && (
+        <Suspense fallback={null}>
+          <ComingSoonModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
+        </Suspense>
+      )}
 
       {/* Hero Section */}
       <section

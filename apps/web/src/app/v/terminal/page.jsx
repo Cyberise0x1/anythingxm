@@ -257,7 +257,7 @@ export default function AssetTerminalPage() {
             
             <div className="relative aspect-video mb-4 border border-[#00ff41]/30 overflow-hidden group">
               <div className="absolute inset-0 bg-[#00ff41]/10 mix-blend-overlay z-10 pointer-events-none group-hover:opacity-0 transition-opacity"></div>
-              <img src="/images/v/terminal/market.png" alt="Abuja Market" className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />
+              <img src="/images/v/terminal/market.png" alt="Abuja Market" loading="lazy" decoding="async" className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />
               <div className="absolute top-2 left-2 bg-black/80 px-2 py-1 text-xs border border-[#00ff41]/50 z-20">
                 ABUJA_MACRO
               </div>
@@ -317,7 +317,7 @@ export default function AssetTerminalPage() {
                     <div className="col-span-3 flex gap-3 items-center">
                       <div className="w-12 h-12 border border-[#00ff41]/30 overflow-hidden relative flex-shrink-0">
                         <div className="absolute inset-0 bg-[#00ff41]/20 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity"></div>
-                        <img src={prop.image} alt={prop.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300" />
+                        <img src={prop.image} alt={prop.name} loading="lazy" decoding="async" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300" />
                       </div>
                       <div>
                         <div className="font-bold text-sm truncate">{prop.name}</div>

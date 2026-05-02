@@ -128,7 +128,10 @@ export default function EditorialEstatePage() {
         <div className="w-full aspect-[16/9] bg-[#EAE8E3] overflow-hidden">
           <img 
             src="/images/v/editorial/hero.png" 
-            alt="Luxury modern villa in Abuja" 
+            alt="Luxury modern villa in Abuja"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
             className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-[2s] ease-out"
           />
         </div>
@@ -158,6 +161,8 @@ export default function EditorialEstatePage() {
                   <img 
                     src={property.image} 
                     alt={property.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000 ease-out"
                   />
                   <div className="absolute top-4 right-4 bg-[#F9F8F5] px-3 py-1.5 text-[10px] uppercase tracking-widest font-sans font-medium flex items-center gap-1.5">
