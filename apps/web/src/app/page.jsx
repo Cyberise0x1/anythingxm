@@ -68,17 +68,24 @@ export default function RealEstatePage() {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setLoadProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          setTimeout(() => setLoading(false), 500);
-          return 100;
-        }
-        return prev + Math.random() * 15;
-      });
-    }, 100);
-    return () => clearInterval(timer);
+    const DURATION_MS = 1200;
+    const start = performance.now();
+    let raf = 0;
+    let doneTimer = 0;
+    const tick = (now) => {
+      const pct = Math.min(100, ((now - start) / DURATION_MS) * 100);
+      setLoadProgress(pct);
+      if (pct < 100) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        doneTimer = window.setTimeout(() => setLoading(false), 250);
+      }
+    };
+    raf = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(raf);
+      if (doneTimer) clearTimeout(doneTimer);
+    };
   }, []);
 
   useEffect(() => {
@@ -145,15 +152,19 @@ export default function RealEstatePage() {
         {loading && (
           <motion.div
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
             className="fixed inset-0 z-[10002] bg-[#0A1929] flex flex-col items-center justify-center"
           >
             <h1 className="font-display text-3xl font-bold bg-gradient-to-r from-[#00D4AA] to-[#FFD700] bg-clip-text text-transparent mb-6">
               XM REAL ESTATE
             </h1>
             <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
-              <motion.div
+              <div
                 className="h-full bg-gradient-to-r from-[#00D4AA] to-[#FFD700]"
-                animate={{ width: `${loadProgress}%` }}
+                style={{
+                  width: `${loadProgress}%`,
+                  willChange: "width",
+                }}
               />
             </div>
           </motion.div>
