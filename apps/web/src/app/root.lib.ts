@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { toPng } from 'html-to-image';
 
-export const links = () => [
-  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
-  {
-    rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap',
-  },
-];
+// NOTE: Sora font links are now hardcoded directly in root.tsx <head> instead of
+// being exposed via React Router's `links` export + <Links /> component. With
+// `ssr: false`, the prerendered shell does NOT execute <Links />, but the
+// hydrating client does — producing a structural <head> mismatch that throws an
+// uncaught hydration error (which the parent sandbox surfaces as a "crash").
+// Hardcoding keeps the server and client markup identical.
+export const links = () => [];
 
 /**
  * useHmrConnection()
