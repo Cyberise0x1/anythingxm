@@ -177,7 +177,7 @@ export default function RealEstatePage() {
       {/* Hero Section */}
       <section
         id="home"
-        className="relative z-10 min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24 overflow-hidden"
+        className="relative z-10 min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-12 pt-24 pb-16 overflow-hidden"
       >
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -191,7 +191,7 @@ export default function RealEstatePage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="font-display text-[clamp(2.5rem,8vw,6rem)] leading-[1.1] font-bold max-w-5xl mb-8"
+          className="font-display text-[clamp(2rem,8vw,6rem)] leading-[1.1] font-bold max-w-5xl mb-6 sm:mb-8"
         >
           <span className="block">Blockchain Properties</span>
           <span className="bg-gradient-to-r from-[#00D4AA] via-[#00FFD0] to-[#FFD700] bg-clip-text text-transparent">
@@ -203,7 +203,7 @@ export default function RealEstatePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed mb-10"
+          className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-10"
         >
           Luxury real estate in Abuja, verified on-chain. Tokenized ownership,
           instant allocation, and seamless liquidity. Powered by XM Trading
@@ -222,7 +222,7 @@ export default function RealEstatePage() {
                 .getElementById("properties")
                 .scrollIntoView({ behavior: "smooth", block: "start" })
             }
-            className="px-8 py-4 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 text-black font-bold text-lg hover:scale-105 transition-transform shadow-lg shadow-emerald-500/30"
+            className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 text-black font-bold text-base sm:text-lg hover:scale-105 transition-transform shadow-lg shadow-emerald-500/30 min-h-[44px]"
           >
             Explore Properties
           </button>
@@ -232,7 +232,7 @@ export default function RealEstatePage() {
                 .getElementById("blockchain")
                 .scrollIntoView({ behavior: "smooth", block: "start" })
             }
-            className="px-8 py-4 rounded-full bg-white/5 border border-white/10 backdrop-blur-md font-bold text-lg hover:bg-white/10 transition-all text-white"
+            className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-white/5 border border-white/10 backdrop-blur-md font-bold text-base sm:text-lg hover:bg-white/10 transition-all text-white min-h-[44px]"
           >
             How Blockchain Works
           </button>
@@ -242,7 +242,7 @@ export default function RealEstatePage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="mt-16 w-full max-w-4xl mx-auto rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative bg-black"
+          className="mt-12 sm:mt-16 w-full max-w-4xl mx-auto rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative bg-black aspect-video"
         >
           <video
             ref={videoRef}
@@ -251,12 +251,12 @@ export default function RealEstatePage() {
             loop
             muted
             playsInline
-            className="w-full h-auto aspect-video object-cover opacity-90"
+            className="absolute inset-0 w-full h-full object-cover opacity-90"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A1929] via-transparent to-transparent pointer-events-none" />
           <button
             onClick={toggleMute}
-            className="absolute top-4 right-4 w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-black/80 hover:border-emerald-500/50 transition-all group pointer-events-auto z-10"
+            className="absolute top-2 right-2 sm:top-4 sm:right-4 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-black/80 hover:border-emerald-500/50 transition-all group pointer-events-auto z-10"
             aria-label={isMuted ? "Unmute video" : "Mute video"}
           >
             {isMuted ? (
@@ -277,27 +277,27 @@ export default function RealEstatePage() {
       </section>
 
       {/* Properties Section */}
-      <section id="properties" className="relative z-10 py-24 px-6">
+      <section id="properties" className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
               Featured{" "}
               <span className="bg-gradient-to-r from-[#00D4AA] to-[#FFD700] bg-clip-text text-transparent">
                 Luxury Developments
               </span>
             </h2>
-            <p className="text-gray-400 max-w-xl mx-auto">
+            <p className="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
               Premium properties in Abuja with transparent, blockchain-verified
               ownership.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {properties.map((prop, index) => (
               <motion.div
                 key={prop.id}
                 whileHover={{ y: -8 }}
-                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[24px] p-6 group hover:border-emerald-500/30 transition-all cursor-pointer"
+                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-[24px] p-5 sm:p-6 group hover:border-emerald-500/30 transition-all cursor-pointer"
               >
                 {/* Property Image Area */}
                 <div className={`h-48 bg-gradient-to-br ${prop.gradient} rounded-2xl mb-6 border border-white/5 group-hover:border-emerald-500/20 transition-colors overflow-hidden relative`}>
@@ -379,16 +379,16 @@ export default function RealEstatePage() {
       </section>
 
       {/* Blockchain Section */}
-      <section id="blockchain" className="relative z-10 py-24 px-6 bg-black/20">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+      <section id="blockchain" className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 bg-black/20">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-8">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8">
               Why{" "}
               <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
                 Blockchain Properties?
               </span>
             </h2>
-            <p className="text-gray-400 text-lg leading-relaxed mb-10">
+            <p className="text-gray-400 text-base sm:text-lg leading-relaxed mb-8 sm:mb-10">
               Traditional real estate is slow, opaque, and fragmented. XM Real
               Estate integrates blockchain technology to bring transparency,
               fractional ownership, and instant liquidity to luxury property
@@ -427,9 +427,9 @@ export default function RealEstatePage() {
             </div>
           </div>
 
-          <div className="bg-white/5 border border-white/10 rounded-[32px] p-8 relative overflow-hidden backdrop-blur-xl shadow-2xl">
+          <div className="bg-white/5 border border-white/10 rounded-2xl sm:rounded-[32px] p-5 sm:p-8 relative overflow-hidden backdrop-blur-xl shadow-2xl">
             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 blur-[60px] rounded-full" />
-            <div className="space-y-6 relative z-10">
+            <div className="space-y-4 sm:space-y-6 relative z-10">
               {[
                 { label: "Blockchain Network", value: "Polygon (MATIC)" },
                 { label: "Token Standard", value: "ERC-721 / ERC-20" },
@@ -437,25 +437,25 @@ export default function RealEstatePage() {
               ].map((item, i) => (
                 <div
                   key={i}
-                  className="flex justify-between items-center p-5 bg-white/5 border border-white/10 rounded-2xl"
+                  className="flex justify-between items-center gap-3 p-4 sm:p-5 bg-white/5 border border-white/10 rounded-2xl"
                 >
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">
                       {item.label}
                     </p>
-                    <p className="text-lg font-bold text-white">{item.value}</p>
+                    <p className="text-base sm:text-lg font-bold text-white truncate">{item.value}</p>
                   </div>
-                  <span className="text-[9px] font-bold text-emerald-400 border border-emerald-400/30 px-2 py-1 rounded-full uppercase">
+                  <span className="shrink-0 text-[9px] font-bold text-emerald-400 border border-emerald-400/30 px-2 py-1 rounded-full uppercase">
                     Locked
                   </span>
                 </div>
               ))}
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-gray-400 font-bold text-sm hover:bg-white/10 transition-all flex justify-between px-6"
+                className="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-gray-400 font-bold text-sm hover:bg-white/10 transition-all flex justify-between gap-3 px-4 sm:px-6 min-h-[44px]"
               >
                 <span>View Smart Contract Explorer</span>
-                <span className="text-yellow-500">Coming Soon</span>
+                <span className="text-yellow-500 shrink-0">Coming Soon</span>
               </button>
             </div>
           </div>
@@ -463,14 +463,14 @@ export default function RealEstatePage() {
       </section>
 
       {/* Academy Section */}
-      <section id="academy" className="relative z-10 py-24 px-6">
-        <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#122538] to-[#0A1929] border border-yellow-500/20 rounded-[40px] p-12 text-center relative overflow-hidden">
+      <section id="academy" className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12">
+        <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#122538] to-[#0A1929] border border-yellow-500/20 rounded-3xl sm:rounded-[40px] p-6 sm:p-10 lg:p-12 text-center relative overflow-hidden">
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-yellow-500/5 blur-[80px] rounded-full" />
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 relative z-10">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4 relative z-10">
             Powered by{" "}
             <span className="text-yellow-400">XM Trading Academy</span>
           </h2>
-          <p className="text-gray-400 text-lg mb-10 relative z-10">
+          <p className="text-gray-400 text-base sm:text-lg mb-8 sm:mb-10 relative z-10">
             Learn Crypto. Build Skills. Trade Smarter. Now applied to Real World
             Assets.
           </p>
@@ -478,7 +478,7 @@ export default function RealEstatePage() {
             href="https://xmacademy.net"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-yellow-500/20 border border-yellow-500/50 text-yellow-500 hover:bg-yellow-500 hover:text-black transition-all font-bold relative z-10"
+            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full bg-yellow-500/20 border border-yellow-500/50 text-yellow-500 hover:bg-yellow-500 hover:text-black transition-all font-bold relative z-10 min-h-[44px]"
           >
             Visit Trading Academy <ArrowRight size={18} />
           </a>
@@ -488,28 +488,28 @@ export default function RealEstatePage() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="relative z-10 py-24 px-6 border-t border-white/10"
+        className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-12 border-t border-white/10"
       >
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
           <div>
-            <h3 className="font-display text-4xl font-bold mb-6">
+            <h3 className="font-display text-3xl sm:text-4xl font-bold mb-4 sm:mb-6">
               Ready to Own the Future?
             </h3>
-            <p className="text-gray-400 text-lg leading-relaxed mb-10">
+            <p className="text-gray-400 text-base sm:text-lg leading-relaxed mb-8 sm:mb-10">
               Connect with our Abuja-based investment team. Secure allocations,
               blockchain verification, and premium property tours.
             </p>
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {[
                 { icon: MapPin, text: "Abuja, Nigeria (Headquarters)" },
                 { icon: Mail, text: "invest@xmrealestate.ng" },
                 { icon: Phone, text: "+234 903 850 7913" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400">
+                  <div className="w-12 h-12 shrink-0 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400">
                     <item.icon size={24} />
                   </div>
-                  <span className="text-lg text-gray-300 font-medium">
+                  <span className="text-base sm:text-lg text-gray-300 font-medium break-words min-w-0">
                     {item.text}
                   </span>
                 </div>
@@ -519,9 +519,9 @@ export default function RealEstatePage() {
 
           <form
             onSubmit={handleFormSubmit}
-            className="space-y-6 bg-white/5 border border-white/10 p-8 rounded-[32px] backdrop-blur-md"
+            className="space-y-5 sm:space-y-6 bg-white/5 border border-white/10 p-5 sm:p-8 rounded-2xl sm:rounded-[32px] backdrop-blur-md"
           >
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               <div className="space-y-2">
                 <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">
                   Full Name
@@ -593,26 +593,27 @@ export default function RealEstatePage() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 py-12 px-6 text-center border-t border-white/10 bg-black/20">
-        <p className="text-gray-500 font-medium">
+      <footer className="relative z-10 py-10 sm:py-12 px-4 sm:px-6 lg:px-12 text-center border-t border-white/10 bg-black/20">
+        <p className="text-gray-500 font-medium text-sm sm:text-base break-words">
           © 2026 XM Real Estate & Properties. All rights reserved.
         </p>
-        <p className="mt-2 text-xs text-gray-600 uppercase tracking-widest font-bold">
+        <p className="mt-2 text-[10px] sm:text-xs text-gray-600 uppercase tracking-widest font-bold break-words">
           Verified on Polygon • Built for Nigeria's Future
         </p>
       </footer>
 
       {/* WhatsApp Float */}
-      <div className="fixed bottom-8 right-8 z-[9997]">
+      <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[9997]">
         <button
           onClick={openWhatsApp}
-          className="flex items-center gap-3 px-6 py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-2xl shadow-emerald-600/40 transition-all hover:scale-110 active:scale-95 group"
+          aria-label="Chat with our team on WhatsApp"
+          className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-2xl shadow-emerald-600/40 transition-all hover:scale-110 active:scale-95 group min-h-[44px]"
         >
           <MessageCircle
-            size={24}
+            size={22}
             className="group-hover:rotate-12 transition-transform"
           />
-          <span className="font-bold text-sm tracking-wide">
+          <span className="hidden sm:inline font-bold text-sm tracking-wide">
             Chat with Team
           </span>
         </button>
