@@ -439,18 +439,24 @@ export function Layout({ children }: { children: ReactNode }) {
   }, [pathname]);
   return (
     <html lang="en">
-      <head>
+      {/*
+        suppressHydrationWarning on <head> tolerates dev-only SSR injections
+        from React Router's <Links /> (the data-react-router-critical-css
+        <style> tag) and any HMR-managed font links, which otherwise produce
+        a position-based hydration mismatch between server and client.
+      */}
+      <head suppressHydrationWarning>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Links />
-        <Meta />
+        <link rel="icon" href="/src/__create/favicon.png" />
         <script
           type="module"
           src="/src/__create/dev-error-overlay.js"
           suppressHydrationWarning
         />
-        <link rel="icon" href="/src/__create/favicon.png" />
         {LoadFontsInProd ? <LoadFontsInProd /> : null}
+        <Meta />
+        <Links />
       </head>
       <body>
         <ErrorBoundaryWrapper>
