@@ -1,5 +1,9 @@
 # XM Real Estate — Luxury Blockchain Real Estate Platform (Nigeria)
 
+> **Agents: read `CHANGELOG.md` BEFORE debugging hydration warnings, "crash"
+> overlays, or the home-page splash. Many of those errors are pre-existing
+> dev-mode noise and there is a documented list of "do not chase" loops.**
+
 ## Overview
 A luxury real estate web app for Nigeria, featuring blockchain-verified properties, Three.js particle animations, DALL-E 3 property images, and Auth.js authentication.
 
