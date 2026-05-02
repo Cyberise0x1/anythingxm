@@ -27,22 +27,18 @@ import { LoadFonts } from 'virtual:load-fonts.jsx';
 import fetch from '@/__create/fetch';
 // @ts-expect-error -- generated auth module, no type declarations available
 import { SessionProvider } from '@auth/create/react';
-import { toPng } from 'html-to-image';
 import { useNavigate } from 'react-router';
 import { serializeError } from 'serialize-error';
 import { Toaster, toast } from 'sonner';
 import { useDevServerHeartbeat } from '../__create/useDevServerHeartbeat';
 import '../__create/design-mode';
+import {
+  useHandleScreenshotRequest,
+  useHandshakeParent,
+} from './root.lib';
 import type { Route } from './+types/root';
 
-export const links = () => [
-  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
-  {
-    rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap',
-  },
-];
+export { links } from './root.lib';
 
 if (globalThis.window && globalThis.window !== undefined) {
   globalThis.window.fetch = fetch;
@@ -264,135 +260,6 @@ class ErrorBoundaryWrapper extends Component<ErrorBoundaryProps, ErrorBoundarySt
   }
 }
 
-/**
- * useHmrConnection()
- * ------------------
- * • `true`  → HMR socket is healthy
- * • `false` → socket lost (Vite is polling / may auto‑reload soon)
- *
- * Works only in dev; in prod it always returns `true`.
- */
-export function useHmrConnection(): boolean {
-  const [connected, setConnected] = useState(() => !!import.meta.hot);
-
-  useEffect(() => {
-    // No HMR object outside dev builds
-    if (!import.meta.hot) return;
-
-    /** Fired the moment the WS closes unexpectedly */
-    const onDisconnect = () => setConnected(false);
-    /** Fired every time the WS (re‑)opens */
-    const onConnect = () => setConnected(true);
-
-    import.meta.hot.on('vite:ws:disconnect', onDisconnect);
-    import.meta.hot.on('vite:ws:connect', onConnect);
-
-    // Optional: catch the “about to full‑reload” event as a last resort
-    const onFullReload = () => setConnected(false);
-    import.meta.hot.on('vite:beforeFullReload', onFullReload);
-
-    return () => {
-      import.meta.hot?.off('vite:ws:disconnect', onDisconnect);
-      import.meta.hot?.off('vite:ws:connect', onConnect);
-      import.meta.hot?.off('vite:beforeFullReload', onFullReload);
-    };
-  }, []);
-
-  return connected;
-}
-
-const healthyResponseType = 'sandbox:web:healthcheck:response';
-const useHandshakeParent = () => {
-  const isHmrConnected = useHmrConnection();
-  useEffect(() => {
-    const healthyResponse = {
-      type: healthyResponseType,
-      healthy: isHmrConnected,
-      supportsErrorDetected: true,
-    };
-    const handleMessage = (event: MessageEvent) => {
-      if (event.data.type === 'sandbox:web:healthcheck') {
-        window.parent.postMessage(healthyResponse, '*');
-      }
-    };
-    window.addEventListener('message', handleMessage);
-    // Immediately respond to the parent window with a healthy response in
-    // case we missed the healthcheck message
-    window.parent.postMessage(healthyResponse, '*');
-    return () => {
-      window.removeEventListener('message', handleMessage);
-    };
-  }, [isHmrConnected]);
-};
-
-const waitForScreenshotReady = async () => {
-  const images = Array.from(document.images);
-
-  await Promise.all([
-    // make sure custom fonts are loaded
-    'fonts' in document ? document.fonts.ready : Promise.resolve(),
-    ...images.map(
-      (img) =>
-        new Promise((resolve) => {
-          img.crossOrigin = 'anonymous';
-          if (img.complete) {
-            resolve(true);
-            return;
-          }
-          img.onload = () => resolve(true);
-          img.onerror = () => resolve(true);
-        })
-    ),
-  ]);
-
-  // small buffer to ensure rendering is stable
-  await new Promise((resolve) => setTimeout(resolve, 250));
-};
-
-export const useHandleScreenshotRequest = () => {
-  useEffect(() => {
-    const handleMessage = async (event: MessageEvent) => {
-      if (event.data.type === 'sandbox:web:screenshot:request') {
-        try {
-          await waitForScreenshotReady();
-
-          const width = window.innerWidth;
-          const aspectRatio = 16 / 9;
-          const height = Math.floor(width / aspectRatio);
-
-          // html-to-image already handles CORS, fonts, and CSS inlining
-          const dataUrl = await toPng(document.body, {
-            cacheBust: true,
-            skipFonts: false,
-            width,
-            height,
-            style: {
-              // force snapshot sizing
-              width: `${width}px`,
-              height: `${height}px`,
-              margin: '0',
-            },
-          });
-
-          window.parent.postMessage({ type: 'sandbox:web:screenshot:response', dataUrl }, '*');
-        } catch (error) {
-          window.parent.postMessage(
-            {
-              type: 'sandbox:web:screenshot:error',
-              error: error instanceof Error ? error.message : String(error),
-            },
-            '*'
-          );
-        }
-      }
-    };
-
-    window.addEventListener('message', handleMessage);
-    return () => {
-      window.removeEventListener('message', handleMessage);
-    };
-  }, []);
-};
 export function Layout({ children }: { children: ReactNode }) {
   useHandshakeParent();
   useHandleScreenshotRequest();
@@ -465,7 +332,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="antialiased">
         <ErrorBoundaryWrapper>
           {children}
         </ErrorBoundaryWrapper>
