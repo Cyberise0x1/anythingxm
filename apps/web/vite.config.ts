@@ -75,6 +75,13 @@ export default defineConfig({
     dedupe: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
   },
   clearScreen: false,
+  build: {
+    target: 'esnext',
+  },
+  ssr: {
+    target: 'node',
+    noExternal: process.env.VERCEL ? true : undefined,
+  },
   server: {
     allowedHosts: true,
     host: '0.0.0.0',

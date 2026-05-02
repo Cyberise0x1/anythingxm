@@ -30,6 +30,10 @@ args = "cd apps/web && bun run dev --port 5000"
 waitForPort = 5000
 
 [[ports]]
+localPort = 3000
+externalPort = 4200
+
+[[ports]]
 localPort = 5000
 externalPort = 80
 
