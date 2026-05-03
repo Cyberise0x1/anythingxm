@@ -1,7 +1,7 @@
 node_modules/
 apps/*/node_modules/
 apps/web/build/
-apps/web/.vercel/output/
+apps/web/.vercel/
 apps/web/.react-router/
 apps/web/.cache/
 apps/web/.vitest/
@@ -10,3 +10,4 @@ apps/mobile/
 *.log
 .env
 .env.*
+.vercel/output/

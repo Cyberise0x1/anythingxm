@@ -31,7 +31,7 @@ export default function EditorialEstatePage() {
       priceNgn: 350,
       priceUsd: 420,
       status: "Verified",
-      image: "/images/v/editorial/property-1.png",
+      image: "/images/v/editorial/property-1.webp",
       description: "A masterclass in spatial economy. This four-bedroom residence in the heart of the capital offers uncompromising privacy with generous communal volumes."
     },
     {
@@ -42,7 +42,7 @@ export default function EditorialEstatePage() {
       priceNgn: 520,
       priceUsd: 620,
       status: "Coming Soon",
-      image: "/images/v/editorial/property-2.png",
+      image: "/images/v/editorial/property-2.webp",
       description: "Defining the new standard for vertical living in Maitama. Five bedrooms spread across considered floorplates, culminating in a private rooftop terrace."
     },
     {
@@ -53,7 +53,7 @@ export default function EditorialEstatePage() {
       priceNgn: 850,
       priceUsd: 1020,
       status: "Tokenized",
-      image: "/images/v/editorial/property-3.png",
+      image: "/images/v/editorial/property-3.webp",
       description: "An architectural statement piece in Asokoro. Six bedrooms of expansive luxury, seamlessly integrating modern aesthetics with absolute permanence."
     }
   ];
@@ -127,7 +127,7 @@ export default function EditorialEstatePage() {
       <section className="px-6 lg:px-12 max-w-7xl mx-auto mb-32">
         <div className="w-full aspect-[16/9] bg-[#EAE8E3] overflow-hidden">
           <img 
-            src="/images/v/editorial/hero.png" 
+            src="/images/v/editorial/hero.webp" 
             alt="Luxury modern villa in Abuja"
             loading="eager"
             decoding="async"

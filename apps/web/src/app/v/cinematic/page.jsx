@@ -29,7 +29,7 @@ export default function CinematicPage() {
       priceNGN: "₦350M",
       priceUSD: "$420K",
       status: "Verified",
-      image: "/images/v/cinematic/hero.png"
+      image: "/images/v/cinematic/hero.webp"
     },
     {
       title: "Executive Terraces",
@@ -38,7 +38,7 @@ export default function CinematicPage() {
       priceNGN: "₦520M",
       priceUSD: "$620K",
       status: "Coming Soon",
-      image: "/images/v/cinematic/exterior-2.png"
+      image: "/images/v/cinematic/exterior-2.webp"
     },
     {
       title: "Blockchain Villa",
@@ -47,7 +47,7 @@ export default function CinematicPage() {
       priceNGN: "₦850M",
       priceUSD: "$1.02M",
       status: "Tokenized",
-      image: "/images/v/cinematic/blockchain-villa.png"
+      image: "/images/v/cinematic/blockchain-villa.webp"
     },
     {
       title: "First of Many Investments",
@@ -56,7 +56,7 @@ export default function CinematicPage() {
       priceNGN: null,
       priceUSD: null,
       status: "On-Chain Title Verified",
-      image: "/images/v/cinematic/interior-1.png",
+      image: "/images/v/cinematic/interior-1.webp",
       isCTA: true
     }
   ];

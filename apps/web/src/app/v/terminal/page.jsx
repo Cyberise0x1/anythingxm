@@ -46,7 +46,7 @@ export default function AssetTerminalPage() {
       capRate: "8.4%",
       occupancy: "100%",
       hash: "0x8F9C...3A12",
-      image: "/images/v/terminal/duplex.png",
+      image: "/images/v/terminal/duplex.webp",
       metrics: [
         { label: "YIELD (PROJ)", value: "12.5%" },
         { label: "IRR (5YR)", value: "18.2%" },
@@ -64,7 +64,7 @@ export default function AssetTerminalPage() {
       capRate: "7.9%",
       occupancy: "N/A",
       hash: "PENDING_MINT",
-      image: "/images/v/terminal/terraces.png",
+      image: "/images/v/terminal/terraces.webp",
       metrics: [
         { label: "YIELD (PROJ)", value: "14.1%" },
         { label: "IRR (5YR)", value: "21.0%" },
@@ -82,7 +82,7 @@ export default function AssetTerminalPage() {
       capRate: "9.2%",
       occupancy: "LEASED",
       hash: "0x4B2E...9F88",
-      image: "/images/v/terminal/villa.png",
+      image: "/images/v/terminal/villa.webp",
       metrics: [
         { label: "YIELD (PROJ)", value: "11.8%" },
         { label: "IRR (5YR)", value: "16.5%" },
@@ -257,7 +257,7 @@ export default function AssetTerminalPage() {
             
             <div className="relative aspect-video mb-4 border border-[#00ff41]/30 overflow-hidden group">
               <div className="absolute inset-0 bg-[#00ff41]/10 mix-blend-overlay z-10 pointer-events-none group-hover:opacity-0 transition-opacity"></div>
-              <img src="/images/v/terminal/market.png" alt="Abuja Market" loading="lazy" decoding="async" className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />
+              <img src="/images/v/terminal/market.webp" alt="Abuja Market" loading="lazy" decoding="async" className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />
               <div className="absolute top-2 left-2 bg-black/80 px-2 py-1 text-xs border border-[#00ff41]/50 z-20">
                 ABUJA_MACRO
               </div>
