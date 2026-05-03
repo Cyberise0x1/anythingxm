@@ -1,6 +1,5 @@
 {pkgs}: {
   deps = [
-    pkgs.gcc-unwrapped
     pkgs.xorg.libxcb
     pkgs.xorg.libXrandr
     pkgs.xorg.libXfixes

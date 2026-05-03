@@ -1,9 +1,5 @@
 # XM Real Estate — Luxury Blockchain Real Estate Platform (Nigeria)
 
-> **Agents: read `CHANGELOG.md` BEFORE debugging hydration warnings, "crash"
-> overlays, or the home-page splash. Many of those errors are pre-existing
-> dev-mode noise and there is a documented list of "do not chase" loops.**
-
 ## Overview
 A luxury real estate web app for Nigeria, featuring blockchain-verified properties, Three.js particle animations, DALL-E 3 property images, and Auth.js authentication.
 
@@ -60,12 +56,6 @@ shared/
 8. **__create/not-found.tsx** — Created missing 404 route component referenced in routes.ts; then converted from server `loader` to client-only component when SSR was disabled
 9. **react-router.config.ts** — Disabled SSR (`ssr: false`) to eliminate React 18 hydration mismatches and uncaught `window.onerror` events
 10. **entry.client.tsx** — Simplified client entry (no hydration boundary needed in SPA mode)
-11. **Sora global font** — Added Sora as `font-sans` and `font-display` in `tailwind.config.js`; applied `font-sans` to `html`/`body`/inputs/buttons in `global.css`; ships Google Fonts stylesheet for Sora 100–800 via React Router's `links` route export so server and client agree (preconnect to fonts.googleapis.com + fonts.gstatic.com with `display=swap` for FOUT-safe loading)
-12. **root.tsx Fast Refresh restored** — Extracted non-component exports (`links`, `useHmrConnection`, `useHandshakeParent`, `useHandleScreenshotRequest`, `waitForScreenshotReady`) to sibling `apps/web/src/app/root.lib.ts`; `root.tsx` re-exports `links` to satisfy the React Router 7 route-module contract. Edits to `root.tsx` now hot-update without `Could not Fast Refresh` and without replaying the splash screen.
-
-## Dev environment requirements
-- **Bun module**: `bun-1.3` (installed via Replit modules) — workflow command `bun run dev --port 5000` requires it on PATH
-- **System lib**: `gcc-unwrapped` (installed via Nix system deps) — provides `libstdc++.so.6` needed by the `argon2` native module at SSR time
 
 ## Environment Variables Required for Full Functionality
 - `DATABASE_URL` — Neon DB connection string (app works without it, DB features disabled)

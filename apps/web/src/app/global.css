@@ -3,11 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  html, body {
-    @apply font-sans;
-    overflow-x: hidden;
-  }
   input, textarea, select, button {
-    @apply outline-none focus:outline-none font-sans;
+    @apply outline-none focus:outline-none;
   }
 }

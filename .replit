@@ -1,4 +1,4 @@
-modules = ["bun-1.3", "nodejs-20", "python-3.11"]
+modules = ["nodejs-20", "python-3.11"]
 [nix]
 channel = "stable-25_05"
 
@@ -30,10 +30,6 @@ args = "cd apps/web && bun run dev --port 5000"
 waitForPort = 5000
 
 [[ports]]
-localPort = 3000
-externalPort = 4200
-
-[[ports]]
 localPort = 5000
 externalPort = 80
 
@@ -41,16 +37,6 @@ externalPort = 80
 localPort = 5001
 externalPort = 3002
 
-[[ports]]
-localPort = 5070
-externalPort = 3001
-
 [postMerge]
 path = "scripts/post-merge.sh"
 timeoutMs = 120000
-
-[userenv]
-
-[userenv.shared]
-GITHUB_TOKEN = "11BV7JH3Y0T3y41A9IYl8F_yAur9ttQA0PJ8T5pU3fMPxDLANvywRseLNkcFtJMpq2N4XLKQCKGtc5ad8b"
-VERCEL_API_KEY = "vcp_3JfGaL4wvEBwL3vrVGhKiXjW04e2bb9nQPZYYF6m2vh3UlZBUv2PTwAG"

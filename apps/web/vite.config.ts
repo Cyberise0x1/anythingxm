@@ -75,37 +75,6 @@ export default defineConfig({
     dedupe: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
   },
   clearScreen: false,
-  build: {
-    target: 'esnext',
-    rollupOptions: process.env.VERCEL
-      ? {
-          output: {
-            manualChunks(id) {
-              if (!id.includes('node_modules')) return;
-              // Three.js is ~1.15MB — isolate it
-              if (/[/\\]three[/\\@.]/.test(id) || id.includes('/three/')) return 'vendor-three';
-              // React core (~350KB)
-              if (
-                (id.includes('/react/') && !id.includes('react-router') && !id.includes('react-dom')) ||
-                id.includes('/react-dom/') ||
-                id.includes('/scheduler/')
-              )
-                return 'vendor-react';
-              // Motion (~400KB)
-              if (id.includes('/motion/') || id.includes('/framer-motion/')) return 'vendor-motion';
-              // React Router (~500KB)
-              if (id.includes('/react-router') || id.includes('/@react-router/')) return 'vendor-router';
-              // Everything else grouped together
-              return 'vendor';
-            },
-          },
-        }
-      : {},
-  },
-  ssr: {
-    target: 'node',
-    noExternal: process.env.VERCEL ? true : undefined,
-  },
   server: {
     allowedHosts: true,
     host: '0.0.0.0',

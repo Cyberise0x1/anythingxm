@@ -1,59 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
-
-function detectWebGL() {
-  if (typeof window === "undefined") return false;
-  try {
-    const canvas = document.createElement("canvas");
-    const gl =
-      canvas.getContext("webgl2") ||
-      canvas.getContext("webgl") ||
-      canvas.getContext("experimental-webgl");
-    return !!gl;
-  } catch (e) {
-    return false;
-  }
-}
-
-function StaticFallback() {
-  return (
-    <div
-      aria-hidden="true"
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        zIndex: 1,
-        pointerEvents: "none",
-        background:
-          "radial-gradient(ellipse at 20% 20%, rgba(0, 212, 170, 0.18), transparent 55%), radial-gradient(ellipse at 80% 30%, rgba(255, 215, 0, 0.10), transparent 55%), radial-gradient(ellipse at 50% 90%, rgba(0, 212, 170, 0.12), transparent 60%), linear-gradient(180deg, #0A1929 0%, #061220 100%)",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage:
-            "radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px)",
-          backgroundSize: "3px 3px",
-          opacity: 0.35,
-          mixBlendMode: "overlay",
-        }}
-      />
-    </div>
-  );
-}
 
 export default function ThreeBackground() {
   const containerRef = useRef(null);
-  const [webglSupported, setWebglSupported] = useState(null);
 
   useEffect(() => {
-    const supported = detectWebGL();
-    setWebglSupported(supported);
-    if (!supported) return;
     if (!containerRef.current) return;
 
     let renderer;
@@ -175,14 +126,9 @@ export default function ThreeBackground() {
         }
       };
     } catch (e) {
-      console.warn("ThreeBackground: WebGL initialization failed, using static fallback.", e.message);
-      setWebglSupported(false);
+      console.warn("ThreeBackground: WebGL not available, skipping 3D background.", e.message);
     }
   }, []);
-
-  if (webglSupported === false) {
-    return <StaticFallback />;
-  }
 
   return (
     <div
