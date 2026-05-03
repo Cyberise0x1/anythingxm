@@ -1,16 +1,5 @@
 #!/usr/bin/env node
-/**
- * Converts the react-router build output (apps/web/build/) into
- * the Vercel Build Output API format (.vercel/output/).
- *
- * Run after `react-router build`:
- *   bun run build-vercel-output
- *
- * Or chained in the build script:
- *   "build": "react-router build && node scripts/build-vercel-output.mjs"
- */
-
-import { execSync } from 'node:child_process';
+import { build as esbuild } from 'esbuild';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -20,7 +9,7 @@ const webRoot = path.resolve(__dirname, '..');
 const repoRoot = path.resolve(webRoot, '../..');
 const vercelOut = path.resolve(repoRoot, '.vercel/output');
 const clientBuild = path.resolve(webRoot, 'build/client');
-const serverBuild = path.resolve(webRoot, 'build/server');
+const stubDir = path.join(__dirname, 'vercel-stubs');
 
 function cp(src, dest) {
   fs.mkdirSync(path.dirname(dest), { recursive: true });
@@ -49,11 +38,7 @@ fs.writeFileSync(
   JSON.stringify({
     version: 3,
     routes: [
-      {
-        src: '^/assets/(.+)$',
-        headers: { 'cache-control': 'public, max-age=31536000, immutable' },
-        continue: true,
-      },
+      { src: '^/assets/(.+)$', headers: { 'cache-control': 'public, max-age=31536000, immutable' }, continue: true },
       { handle: 'filesystem' },
       { src: '/(.*)', dest: '/index' },
     ],
@@ -66,22 +51,49 @@ fs.writeFileSync(
 );
 
 const vercelEntry = path.join(__dirname, 'vercel-entry.mjs');
-const stubDir = path.join(__dirname, 'vercel-stubs');
 const funcOut = path.join(vercelOut, 'functions/index.func/index.js');
+
+// Stub for native/problematic modules
+const stubs = {
+  'argon2': path.join(stubDir, 'argon2.mjs'),
+  'ws': path.join(stubDir, 'ws.mjs'),
+  '@neondatabase/serverless': path.join(stubDir, 'neon.mjs'),
+  '@react-router/dev/routes': path.join(stubDir, 'react-router-dev-routes.mjs'),
+};
+
+// The index-CbdE1pet.js path that server-build.js imports
+const honoAppPath = path.resolve(webRoot, 'build/server/assets/index-CbdE1pet.js');
+const honoAppStub = path.join(stubDir, 'hono-app.mjs');
+
 console.log('Bundling server function...');
-execSync(
-  [
-    'bunx esbuild', vercelEntry,
-    '--bundle --platform=node --target=esnext --format=esm',
-    `--banner:js="import{createRequire}from'module';const require=createRequire(import.meta.url);"`,
-    `--alias:argon2=${path.join(stubDir, 'argon2.mjs')}`,
-    `--alias:@hono/node-server=${path.join(stubDir, 'node-server.mjs')}`,
-    `--alias:@hono/node-server/serve-static=${path.join(stubDir, 'node-server-serve-static.mjs')}`,
-    '--external:lightningcss',
-    `--outfile=${funcOut}`,
-  ].join(' '),
-  { stdio: 'inherit', cwd: webRoot }
-);
+await esbuild({
+  entryPoints: [vercelEntry],
+  bundle: true,
+  platform: 'node',
+  target: 'esnext',
+  format: 'esm',
+  outfile: funcOut,
+  banner: {
+    js: `import{createRequire}from'module';import{fileURLToPath as __fup}from'url';import{dirname as __dn}from'path';const require=createRequire(import.meta.url);const __filename=__fup(import.meta.url);const __dirname=__dn(__filename);`
+  },
+  external: ['lightningcss'],
+  plugins: [
+    {
+      name: 'stub-natives',
+      setup(build) {
+        // Stub known-problematic packages by name
+        for (const [pkg, stubPath] of Object.entries(stubs)) {
+          const filter = new RegExp(`^${pkg.replace(/[@/]/g, (c) => c === '@' ? '@' : '\\/')}$`);
+          build.onResolve({ filter }, () => ({ path: stubPath }));
+        }
+        // Stub index-CbdE1pet.js by absolute path (imported as relative by server-build.js)
+        build.onResolve({ filter: /index-CbdE1pet/ }, () => ({ path: honoAppStub }));
+      },
+    },
+  ],
+});
+
+console.log(`Server function bundled to ${funcOut}`);
 
 cpDir(path.join(clientBuild, 'assets'), path.join(vercelOut, 'static/assets'));
 cpDir(path.join(clientBuild, 'properties'), path.join(vercelOut, 'static/properties'));
