@@ -7,9 +7,6 @@ apps/web/.cache/
 apps/web/.vitest/
 apps/mobile/
 .cache/
-attached_assets/
-docs/
-scripts/
 *.log
 .env
 .env.*
