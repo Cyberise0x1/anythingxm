@@ -8,7 +8,6 @@ apps/web/.vitest/
 apps/mobile/
 .cache/
 attached_assets/
-zipFile.zip
 docs/
 scripts/
 *.log
