@@ -464,7 +464,7 @@ export default function RealEstatePage() {
 
       {/* Academy Section */}
       <section id="academy" className="relative z-10 py-24 px-6">
-        <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#122538] to-[#0A1929] border border-yellow-500/20 rounded-[40px] p-12 text-center relative overflow-hidden">
+        <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#122538] to-[#0A1929] border border-yellow-500/20 rounded-[32px] md:rounded-[40px] p-8 md:p-12 text-center relative overflow-hidden">
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-yellow-500/5 blur-[80px] rounded-full" />
           <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 relative z-10">
             Powered by{" "}
