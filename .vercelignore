@@ -1,0 +1,16 @@
+node_modules/
+apps/*/node_modules/
+apps/web/build/
+apps/web/.vercel/output/
+apps/web/.react-router/
+apps/web/.cache/
+apps/web/.vitest/
+apps/mobile/
+.cache/
+attached_assets/
+zipFile.zip
+docs/
+scripts/
+*.log
+.env
+.env.*
