@@ -48,3 +48,8 @@ externalPort = 3001
 [postMerge]
 path = "scripts/post-merge.sh"
 timeoutMs = 120000
+
+[userenv]
+
+[userenv.shared]
+GITHUB_TOKEN = "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"
