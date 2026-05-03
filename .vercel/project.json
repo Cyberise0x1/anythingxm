@@ -1,0 +1,16 @@
+{
+  "projectId": "prj_7zdrbP9eYs6kPjdEsxQT2FgHkZH5",
+  "orgId": "team_77AQxqCkTaCHg5rntA64HHp3",
+  "projectName": "xm-real-estate",
+  "settings": {
+    "createdAt": 1777817741857,
+    "framework": null,
+    "devCommand": null,
+    "installCommand": "echo 'install handled in buildCommand'",
+    "buildCommand": "cd apps/web && bun install && bun run build",
+    "outputDirectory": "apps/web/.vercel/output",
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}

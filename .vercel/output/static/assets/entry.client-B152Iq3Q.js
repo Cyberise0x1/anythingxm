@@ -1,0 +1,1 @@
+import{r as t,e as n,j as i}from"./vendor-react-BJiFWTQr.js";import{H as a}from"./vendor-router-C80NsMzQ.js";if(typeof window<"u"){const o={};globalThis.process??={};const r=globalThis.process.env??{};globalThis.process.env=new Proxy(Object.assign({},o,r),{get(s,e){return e in s?s[e]:void 0},has(){return!0}})}t.startTransition(()=>{n.hydrateRoot(document,i.jsx(a,{}))});

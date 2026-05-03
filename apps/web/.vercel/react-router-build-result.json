@@ -1,0 +1,486 @@
+{
+  "buildManifest": {
+    "serverBundles": {
+      "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0": {
+        "id": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+        "file": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    },
+    "routeIdToServerBundleId": {
+      "page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "__create/social-dev-shim/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/async-effect-error/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/event-handler-error/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/fails-ssr/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/hook-rule/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/hydration-mismatch/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/infinite-render-loop/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/json-parse-error/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/localstorage-ssr/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/missing-component/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/null-access/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/render-object/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/stack-overflow/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/type-error-not-function/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/undefined-access/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "errors/unhandled-promise/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "v/editorial/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "v/terminal/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "v/cinematic/page": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "__create/not-found": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "src/app/root.tsx",
+        "path": "",
+        "config": {}
+      },
+      "page": {
+        "id": "page",
+        "parentId": "root",
+        "file": "src/app/page.jsx",
+        "index": true,
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "__create/social-dev-shim/page": {
+        "id": "__create/social-dev-shim/page",
+        "parentId": "root",
+        "file": "src/app/__create/social-dev-shim/page.jsx",
+        "path": "__create/social-dev-shim",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/async-effect-error/page": {
+        "id": "errors/async-effect-error/page",
+        "parentId": "root",
+        "file": "src/app/errors/async-effect-error/page.jsx",
+        "path": "errors/async-effect-error",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/event-handler-error/page": {
+        "id": "errors/event-handler-error/page",
+        "parentId": "root",
+        "file": "src/app/errors/event-handler-error/page.jsx",
+        "path": "errors/event-handler-error",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/fails-ssr/page": {
+        "id": "errors/fails-ssr/page",
+        "parentId": "root",
+        "file": "src/app/errors/fails-ssr/page.jsx",
+        "path": "errors/fails-ssr",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/hook-rule/page": {
+        "id": "errors/hook-rule/page",
+        "parentId": "root",
+        "file": "src/app/errors/hook-rule/page.jsx",
+        "path": "errors/hook-rule",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/hydration-mismatch/page": {
+        "id": "errors/hydration-mismatch/page",
+        "parentId": "root",
+        "file": "src/app/errors/hydration-mismatch/page.jsx",
+        "path": "errors/hydration-mismatch",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/infinite-render-loop/page": {
+        "id": "errors/infinite-render-loop/page",
+        "parentId": "root",
+        "file": "src/app/errors/infinite-render-loop/page.jsx",
+        "path": "errors/infinite-render-loop",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/json-parse-error/page": {
+        "id": "errors/json-parse-error/page",
+        "parentId": "root",
+        "file": "src/app/errors/json-parse-error/page.jsx",
+        "path": "errors/json-parse-error",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/localstorage-ssr/page": {
+        "id": "errors/localstorage-ssr/page",
+        "parentId": "root",
+        "file": "src/app/errors/localstorage-ssr/page.jsx",
+        "path": "errors/localstorage-ssr",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/missing-component/page": {
+        "id": "errors/missing-component/page",
+        "parentId": "root",
+        "file": "src/app/errors/missing-component/page.jsx",
+        "path": "errors/missing-component",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/null-access/page": {
+        "id": "errors/null-access/page",
+        "parentId": "root",
+        "file": "src/app/errors/null-access/page.jsx",
+        "path": "errors/null-access",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/render-object/page": {
+        "id": "errors/render-object/page",
+        "parentId": "root",
+        "file": "src/app/errors/render-object/page.jsx",
+        "path": "errors/render-object",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/stack-overflow/page": {
+        "id": "errors/stack-overflow/page",
+        "parentId": "root",
+        "file": "src/app/errors/stack-overflow/page.jsx",
+        "path": "errors/stack-overflow",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/type-error-not-function/page": {
+        "id": "errors/type-error-not-function/page",
+        "parentId": "root",
+        "file": "src/app/errors/type-error-not-function/page.jsx",
+        "path": "errors/type-error-not-function",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/undefined-access/page": {
+        "id": "errors/undefined-access/page",
+        "parentId": "root",
+        "file": "src/app/errors/undefined-access/page.jsx",
+        "path": "errors/undefined-access",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "errors/unhandled-promise/page": {
+        "id": "errors/unhandled-promise/page",
+        "parentId": "root",
+        "file": "src/app/errors/unhandled-promise/page.jsx",
+        "path": "errors/unhandled-promise",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "v/editorial/page": {
+        "id": "v/editorial/page",
+        "parentId": "root",
+        "file": "src/app/v/editorial/page.jsx",
+        "path": "v/editorial",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "v/terminal/page": {
+        "id": "v/terminal/page",
+        "parentId": "root",
+        "file": "src/app/v/terminal/page.jsx",
+        "path": "v/terminal",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "v/cinematic/page": {
+        "id": "v/cinematic/page",
+        "parentId": "root",
+        "file": "src/app/v/cinematic/page.jsx",
+        "path": "v/cinematic",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "__create/not-found": {
+        "id": "__create/not-found",
+        "parentId": "root",
+        "file": "src/app/__create/not-found.tsx",
+        "path": "*?",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    }
+  },
+  "reactRouterConfig": {
+    "appDirectory": "/home/runner/workspace/apps/web/src/app",
+    "basename": "/",
+    "buildDirectory": "/home/runner/workspace/apps/web/build",
+    "future": {
+      "unstable_optimizeDeps": false,
+      "unstable_subResourceIntegrity": false,
+      "unstable_trailingSlashAwareDataRequests": false,
+      "unstable_previewServerPrerendering": false,
+      "v8_middleware": false,
+      "v8_splitRouteModules": false,
+      "v8_viteEnvironmentApi": false
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "root.tsx",
+        "path": ""
+      },
+      "page": {
+        "id": "page",
+        "parentId": "root",
+        "file": "./page.jsx",
+        "index": true
+      },
+      "__create/social-dev-shim/page": {
+        "id": "__create/social-dev-shim/page",
+        "parentId": "root",
+        "file": "./__create/social-dev-shim/page.jsx",
+        "path": "__create/social-dev-shim"
+      },
+      "errors/async-effect-error/page": {
+        "id": "errors/async-effect-error/page",
+        "parentId": "root",
+        "file": "./errors/async-effect-error/page.jsx",
+        "path": "errors/async-effect-error"
+      },
+      "errors/event-handler-error/page": {
+        "id": "errors/event-handler-error/page",
+        "parentId": "root",
+        "file": "./errors/event-handler-error/page.jsx",
+        "path": "errors/event-handler-error"
+      },
+      "errors/fails-ssr/page": {
+        "id": "errors/fails-ssr/page",
+        "parentId": "root",
+        "file": "./errors/fails-ssr/page.jsx",
+        "path": "errors/fails-ssr"
+      },
+      "errors/hook-rule/page": {
+        "id": "errors/hook-rule/page",
+        "parentId": "root",
+        "file": "./errors/hook-rule/page.jsx",
+        "path": "errors/hook-rule"
+      },
+      "errors/hydration-mismatch/page": {
+        "id": "errors/hydration-mismatch/page",
+        "parentId": "root",
+        "file": "./errors/hydration-mismatch/page.jsx",
+        "path": "errors/hydration-mismatch"
+      },
+      "errors/infinite-render-loop/page": {
+        "id": "errors/infinite-render-loop/page",
+        "parentId": "root",
+        "file": "./errors/infinite-render-loop/page.jsx",
+        "path": "errors/infinite-render-loop"
+      },
+      "errors/json-parse-error/page": {
+        "id": "errors/json-parse-error/page",
+        "parentId": "root",
+        "file": "./errors/json-parse-error/page.jsx",
+        "path": "errors/json-parse-error"
+      },
+      "errors/localstorage-ssr/page": {
+        "id": "errors/localstorage-ssr/page",
+        "parentId": "root",
+        "file": "./errors/localstorage-ssr/page.jsx",
+        "path": "errors/localstorage-ssr"
+      },
+      "errors/missing-component/page": {
+        "id": "errors/missing-component/page",
+        "parentId": "root",
+        "file": "./errors/missing-component/page.jsx",
+        "path": "errors/missing-component"
+      },
+      "errors/null-access/page": {
+        "id": "errors/null-access/page",
+        "parentId": "root",
+        "file": "./errors/null-access/page.jsx",
+        "path": "errors/null-access"
+      },
+      "errors/render-object/page": {
+        "id": "errors/render-object/page",
+        "parentId": "root",
+        "file": "./errors/render-object/page.jsx",
+        "path": "errors/render-object"
+      },
+      "errors/stack-overflow/page": {
+        "id": "errors/stack-overflow/page",
+        "parentId": "root",
+        "file": "./errors/stack-overflow/page.jsx",
+        "path": "errors/stack-overflow"
+      },
+      "errors/type-error-not-function/page": {
+        "id": "errors/type-error-not-function/page",
+        "parentId": "root",
+        "file": "./errors/type-error-not-function/page.jsx",
+        "path": "errors/type-error-not-function"
+      },
+      "errors/undefined-access/page": {
+        "id": "errors/undefined-access/page",
+        "parentId": "root",
+        "file": "./errors/undefined-access/page.jsx",
+        "path": "errors/undefined-access"
+      },
+      "errors/unhandled-promise/page": {
+        "id": "errors/unhandled-promise/page",
+        "parentId": "root",
+        "file": "./errors/unhandled-promise/page.jsx",
+        "path": "errors/unhandled-promise"
+      },
+      "v/editorial/page": {
+        "id": "v/editorial/page",
+        "parentId": "root",
+        "file": "./v/editorial/page.jsx",
+        "path": "v/editorial"
+      },
+      "v/terminal/page": {
+        "id": "v/terminal/page",
+        "parentId": "root",
+        "file": "./v/terminal/page.jsx",
+        "path": "v/terminal"
+      },
+      "v/cinematic/page": {
+        "id": "v/cinematic/page",
+        "parentId": "root",
+        "file": "./v/cinematic/page.jsx",
+        "path": "v/cinematic"
+      },
+      "__create/not-found": {
+        "id": "__create/not-found",
+        "parentId": "root",
+        "file": "./__create/not-found.tsx",
+        "path": "*?"
+      }
+    },
+    "routeDiscovery": {
+      "mode": "lazy",
+      "manifestPath": "/__manifest"
+    },
+    "serverBuildFile": "index.js",
+    "serverModuleFormat": "esm",
+    "ssr": true,
+    "allowedActionOrigins": false,
+    "unstable_routeConfig": [
+      {
+        "id": "root",
+        "path": "",
+        "file": "root.tsx",
+        "children": [
+          {
+            "file": "./page.jsx",
+            "index": true
+          },
+          {
+            "file": "./__create/social-dev-shim/page.jsx",
+            "path": "__create/social-dev-shim"
+          },
+          {
+            "file": "./errors/async-effect-error/page.jsx",
+            "path": "errors/async-effect-error"
+          },
+          {
+            "file": "./errors/event-handler-error/page.jsx",
+            "path": "errors/event-handler-error"
+          },
+          {
+            "file": "./errors/fails-ssr/page.jsx",
+            "path": "errors/fails-ssr"
+          },
+          {
+            "file": "./errors/hook-rule/page.jsx",
+            "path": "errors/hook-rule"
+          },
+          {
+            "file": "./errors/hydration-mismatch/page.jsx",
+            "path": "errors/hydration-mismatch"
+          },
+          {
+            "file": "./errors/infinite-render-loop/page.jsx",
+            "path": "errors/infinite-render-loop"
+          },
+          {
+            "file": "./errors/json-parse-error/page.jsx",
+            "path": "errors/json-parse-error"
+          },
+          {
+            "file": "./errors/localstorage-ssr/page.jsx",
+            "path": "errors/localstorage-ssr"
+          },
+          {
+            "file": "./errors/missing-component/page.jsx",
+            "path": "errors/missing-component"
+          },
+          {
+            "file": "./errors/null-access/page.jsx",
+            "path": "errors/null-access"
+          },
+          {
+            "file": "./errors/render-object/page.jsx",
+            "path": "errors/render-object"
+          },
+          {
+            "file": "./errors/stack-overflow/page.jsx",
+            "path": "errors/stack-overflow"
+          },
+          {
+            "file": "./errors/type-error-not-function/page.jsx",
+            "path": "errors/type-error-not-function"
+          },
+          {
+            "file": "./errors/undefined-access/page.jsx",
+            "path": "errors/undefined-access"
+          },
+          {
+            "file": "./errors/unhandled-promise/page.jsx",
+            "path": "errors/unhandled-promise"
+          },
+          {
+            "file": "./v/editorial/page.jsx",
+            "path": "v/editorial"
+          },
+          {
+            "file": "./v/terminal/page.jsx",
+            "path": "v/terminal"
+          },
+          {
+            "file": "./v/cinematic/page.jsx",
+            "path": "v/cinematic"
+          },
+          {
+            "file": "./__create/not-found.tsx",
+            "path": "*?"
+          }
+        ]
+      }
+    ]
+  },
+  "viteConfig": {
+    "build": {
+      "assetsDir": "assets"
+    }
+  }
+}
