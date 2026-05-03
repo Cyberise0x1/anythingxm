@@ -60,38 +60,33 @@ mkdirSync(FUNC_DIR, { recursive: true });
 console.log('[vercel-output] Copying server bundle files...');
 cpSync(SERVER_BUNDLE_DIR, FUNC_DIR, { recursive: true });
 
-// Symlink apps/web/node_modules into the func dir so esbuild can resolve packages
-// when bundling from FUNC_DIR. Removed after bundling.
+// Symlink apps/web/node_modules so esbuild can resolve packages from FUNC_DIR.
 const NM_LINK = join(FUNC_DIR, 'node_modules');
 symlinkSync(join(WEB_DIR, 'node_modules'), NM_LINK, 'dir');
 
-// Entry file written in FUNC_DIR.
-// ./index.js is marked EXTERNAL → all server bundle chunks stay as separate files.
-// esbuild only bundles @react-router/node + @mjackson/node-fetch-server (~200KB).
-const ENTRY_SRC = join(FUNC_DIR, '_entry.mjs');
+// Entry: bundle EVERYTHING into one self-contained index.mjs.
+// No externals for local files — this avoids the circular dependency where
+// @react-router/node needs react-router which lives in a vendor chunk.
+// The resulting file is larger but guaranteed to work at runtime.
+// Use CommonJS output — Vercel's launcherType:Nodejs loads the handler via require(),
+// which cannot load ESM .mjs files. CJS is the safe, compatible choice.
+const ENTRY_SRC = join(FUNC_DIR, '_entry.cjs');
 writeFileSync(
   ENTRY_SRC,
-  `import { createRequestHandler } from "@react-router/node";
-import * as build from "./index.js";
+  `const { createRequestListener } = require("@react-router/node");
+// _src_index.js is the renamed server entry (renamed to avoid output name collision)
+const build = require("./_src_index.js");
 
-const handler = createRequestHandler(build, "production");
-
-export default function (req, res) {
-  return handler(req, res);
-}
+// createRequestListener returns a Node.js http.RequestListener (req, res) => void
+module.exports = createRequestListener({ build, mode: "production" });
 `
 );
 
-// Mark all asset .js files as external so esbuild does not re-bundle them
-const assetDir = join(FUNC_DIR, 'assets');
-let assetExternals = '';
-if (existsSync(assetDir)) {
-  const assetFiles = readdirSync(assetDir).filter(f => f.endsWith('.js'));
-  assetExternals = assetFiles.map(f => `--external:./assets/${f}`).join(' ');
-  console.log(`[vercel-output] Marking ${assetFiles.length} asset chunk(s) as external`);
-}
+// Rename the server entry so esbuild output can safely use 'index.js'
+const { renameSync } = await import('fs');
+renameSync(join(FUNC_DIR, 'index.js'), join(FUNC_DIR, '_src_index.js'));
 
-console.log('[vercel-output] Bundling SSR function with esbuild (all chunks kept external)...');
+console.log('[vercel-output] Bundling SSR function with esbuild (CJS, fully self-contained)...');
 execSync(
   [
     'bunx esbuild',
@@ -99,10 +94,8 @@ execSync(
     '--bundle',
     '--platform=node',
     '--target=node22',
-    '--format=esm',
-    `--outfile=${join(FUNC_DIR, 'index.mjs')}`,
-    '--external:./index.js',   // keep server entry external
-    assetExternals,            // keep all asset chunks external
+    '--format=cjs',
+    `--outfile=${join(FUNC_DIR, 'index.js')}`,
     '--external:fsevents',
     '--external:lightningcss',
     '--log-level=warning',
@@ -113,6 +106,15 @@ execSync(
 // Clean up temp files
 rmSync(ENTRY_SRC);
 rmSync(NM_LINK);
+rmSync(join(FUNC_DIR, '_src_index.js'));
+
+// Remove the now-inlined asset JS chunks from the function dir
+const assetDir = join(FUNC_DIR, 'assets');
+if (existsSync(assetDir)) {
+  const jsChunks = readdirSync(assetDir).filter(f => f.endsWith('.js'));
+  for (const chunk of jsChunks) rmSync(join(assetDir, chunk));
+  console.log(`[vercel-output] Removed ${jsChunks.length} inlined JS chunk(s) from assets/`);
+}
 
 // Write .vc-config.json — tells Vercel runtime how to invoke the function
 writeFileSync(
@@ -120,7 +122,7 @@ writeFileSync(
   JSON.stringify(
     {
       runtime: 'nodejs22.x',
-      handler: 'index.mjs',
+      handler: 'index.js',
       launcherType: 'Nodejs',
     },
     null,
