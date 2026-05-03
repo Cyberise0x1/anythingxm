@@ -50,6 +50,11 @@ fs.writeFileSync(
   JSON.stringify({ runtime: 'nodejs22.x', handler: 'index.js', launcherType: 'Nodejs' }, null, 2)
 );
 
+fs.writeFileSync(
+  path.join(vercelOut, 'functions/index.func/package.json'),
+  JSON.stringify({ type: 'module' }, null, 2)
+);
+
 const vercelEntry = path.join(__dirname, 'vercel-entry.mjs');
 const funcOut = path.join(vercelOut, 'functions/index.func/index.js');
 
