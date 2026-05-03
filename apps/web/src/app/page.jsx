@@ -147,476 +147,398 @@ export default function RealEstatePage() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[10002] bg-[#0A1929] flex flex-col items-center justify-center"
           >
-            <h1 className="font-display text-3xl font-bold bg-gradient-to-r from-[#00D4AA] to-[#FFD700] bg-clip-text text-transparent mb-6">
-              XM REAL ESTATE
-            </h1>
-            <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
-              <motion.div
-                className="h-full bg-gradient-to-r from-[#00D4AA] to-[#FFD700]"
-                animate={{ width: `${loadProgress}%` }}
-              />
+            <h1 className="font-display text-3xl font-bold bg-gradient-to-r from-[#00D4AA] to-[#FFD700] bg-clip-text text-transparent mb-6"></h1>
+            <div className="w-64 bg-gray-800 rounded-full overflow-hidden">
+              <div
+                className="h-1 bg-gradient-to-r from-[#00D4AA] to-[#FFD700] transition-all duration-300"
+                style={{ width: `${loadProgress}%` }}
+              ></div>
             </div>
+            <p className="text-gray-400 mt-4 text-sm">{Math.round(loadProgress)}%</p>
           </motion.div>
         )}
       </AnimatePresence>
 
       <ThreeBackground />
       <Cursor />
+      <Navbar setIsModalOpen={setIsModalOpen} />
 
-      <div
-        className="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-[#00D4AA] to-[#FFD700] z-[9999] transition-all duration-100 ease-out"
-        style={{ width: `${scrollProgress}%` }}
-      />
-
-      <Navbar onOpenComingSoon={() => setIsModalOpen(true)} />
-      <ComingSoonModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
-
-      {/* Hero Section */}
-      <section
-        id="home"
-        className="relative z-10 min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24 overflow-hidden"
-      >
+      <section className="relative min-h-screen flex flex-col justify-center items-center px-4 py-20 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="px-4 py-1.5 rounded-full bg-white/5 border border-white/20 text-[10px] font-bold tracking-widest uppercase backdrop-blur-md mb-8 text-emerald-400"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: loading ? 0 : 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-center max-w-4xl mx-auto"
         >
-          🌍 The First of Many Investments
-        </motion.div>
+          <div className="inline-block px-4 py-2 bg-[#00D4AA]/10 border border-[#00D4AA]/30 rounded-full mb-8">
+            <span className="text-[#00D4AA] text-sm font-medium">
+              ✦ THE FIRST REAL ESTATE ON BLOCKCHAIN
+            </span>
+          </div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="font-display text-[clamp(2.5rem,8vw,6rem)] leading-[1.1] font-bold max-w-5xl mb-8"
-        >
-          <span className="block">Blockchain Properties</span>
-          <span className="bg-gradient-to-r from-[#00D4AA] via-[#00FFD0] to-[#FFD700] bg-clip-text text-transparent">
-            Reimagining Ownership
-          </span>
-        </motion.h1>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            <span className="text-white">Blockchain</span>
+            <br />
+            <span className="bg-gradient-to-r from-[#00D4AA] via-[#00D4AA] to-[#FFD700] bg-clip-text text-transparent">
+              Properties
+            </span>
+          </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed mb-10"
-        >
-          Luxury real estate in Abuja, verified on-chain. Tokenized ownership,
-          instant allocation, and seamless liquidity. Powered by XM Trading
-          Academy.
-        </motion.p>
+          <p className="text-gray-300 text-lg sm:text-xl mb-8 max-w-2xl mx-auto font-light leading-relaxed">
+            Reinvagining Property Ownership on-chain
+          </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
-        >
-          <button
-            onClick={() =>
-              document
-                .getElementById("properties")
-                .scrollIntoView({ behavior: "smooth", block: "start" })
-            }
-            className="px-8 py-4 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 text-black font-bold text-lg hover:scale-105 transition-transform shadow-lg shadow-emerald-500/30"
-          >
-            Explore Properties
-          </button>
-          <button
-            onClick={() =>
-              document
-                .getElementById("blockchain")
-                .scrollIntoView({ behavior: "smooth", block: "start" })
-            }
-            className="px-8 py-4 rounded-full bg-white/5 border border-white/10 backdrop-blur-md font-bold text-lg hover:bg-white/10 transition-all text-white"
-          >
-            How Blockchain Works
-          </button>
-        </motion.div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="px-8 py-3 bg-[#00D4AA] text-black font-semibold rounded-lg hover:bg-[#00D4AA]/90 transition-all duration-300 inline-flex items-center gap-2"
+            >
+              Explore Properties <ArrowRight size={20} />
+            </button>
+            <button
+              onClick={openWhatsApp}
+              className="px-8 py-3 border border-[#00D4AA]/50 text-[#00D4AA] font-semibold rounded-lg hover:bg-[#00D4AA]/10 transition-all duration-300"
+            >
+              How Blockchain Works
+            </button>
+          </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="mt-16 w-full max-w-4xl mx-auto rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative bg-black"
-        >
-          <video
-            ref={videoRef}
-            src="https://ucarecdn.com/5d5a4c10-d76e-4d43-8335-a3eb6cc0c7eb/"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-auto aspect-video object-cover opacity-90"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A1929] via-transparent to-transparent pointer-events-none" />
-          <button
-            onClick={toggleMute}
-            className="absolute top-4 right-4 w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-black/80 hover:border-emerald-500/50 transition-all group pointer-events-auto z-10"
-            aria-label={isMuted ? "Unmute video" : "Mute video"}
-          >
-            {isMuted ? (
-              <VolumeX className="w-5 h-5 group-hover:text-emerald-400 transition-colors" />
-            ) : (
-              <Volume2 className="w-5 h-5 text-emerald-400" />
-            )}
-          </button>
-        </motion.div>
-
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-10"
-        >
-          <ChevronDown className="w-6 h-6 text-gray-500" />
+          <div className="text-gray-400 text-sm max-w-xl mx-auto">
+            <p>
+              Quintessential real estate in Abuja, verified on-chain, tokenized
+              ownership, instant allocation, and seamless liquidity. Powered by
+              XM Trading Academy.
+            </p>
+          </div>
         </motion.div>
       </section>
 
-      {/* Properties Section */}
-      <section id="properties" className="relative z-10 py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-              Featured{" "}
-              <span className="bg-gradient-to-r from-[#00D4AA] to-[#FFD700] bg-clip-text text-transparent">
-                Luxury Developments
-              </span>
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              Featured Properties
             </h2>
-            <p className="text-gray-400 max-w-xl mx-auto">
-              Premium properties in Abuja with transparent, blockchain-verified
-              ownership.
+            <p className="text-gray-300 text-lg">
+              Curated blockchain properties for investors
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {properties.map((prop, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {properties.map((property, idx) => (
               <motion.div
-                key={prop.id}
-                whileHover={{ y: -8 }}
-                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[24px] p-6 group hover:border-emerald-500/30 transition-all cursor-pointer"
+                key={property.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                className={`rounded-xl overflow-hidden border border-gray-700/50 hover:border-[#00D4AA]/50 transition-all duration-300 bg-gradient-to-br ${property.gradient}`}
               >
-                {/* Property Image Area */}
-                <div className={`h-48 bg-gradient-to-br ${prop.gradient} rounded-2xl mb-6 border border-white/5 group-hover:border-emerald-500/20 transition-colors overflow-hidden relative`}>
-                  <div className="absolute inset-0 flex items-end p-4">
-                    <div className="w-full h-[1px] bg-gradient-to-r from-emerald-500/30 via-[#00D4AA]/20 to-transparent" />
-                  </div>
-                  <div className="absolute top-4 right-4 w-8 h-8 rounded-full border border-emerald-500/20 flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-emerald-400/60" />
+                <div className="aspect-square bg-gray-800/50 relative overflow-hidden flex items-center justify-center group">
+                  <div className="text-center">
+                    <h3 className="text-2xl font-bold mb-2 group-hover:scale-105 transition-transform">
+                      {property.title}
+                    </h3>
+                    <p className="text-gray-300">{property.beds} Bedrooms</p>
                   </div>
                 </div>
 
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-display text-xl font-bold">
-                    {prop.title}
-                  </h3>
-                  <span
-                    className={`text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider ${
-                      prop.verified
-                        ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/20"
-                        : "bg-yellow-500/20 text-yellow-400 border border-yellow-500/20"
-                    }`}
-                  >
-                    {prop.tag}
-                  </span>
-                </div>
-
-                <p className="text-gray-400 text-sm mb-6">
-                  {prop.beds} Beds • Modern Amenities • {prop.location}
-                </p>
-
-                <div className="flex justify-between items-center">
-                  <div>
-                    <p className="text-xl font-bold text-white">
-                      {isNaira ? prop.priceNgn : prop.priceUsd}
-                    </p>
-                    <p className="text-[10px] text-gray-500 font-mono uppercase">
-                      {isNaira ? "Naira Allocation" : "USD Valuation"}
-                    </p>
+                <div className="p-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="px-3 py-1 bg-[#00D4AA]/20 text-[#00D4AA] text-xs font-semibold rounded-full">
+                      {property.tag}
+                    </span>
+                    {property.verified && <Check size={16} className="text-[#00D4AA]" />}
                   </div>
+
+                  <h3 className="text-xl font-bold mb-2">{property.title}</h3>
+                  <div className="flex items-center gap-2 text-gray-300 mb-4">
+                    <MapPin size={16} />
+                    <span className="text-sm">{property.location}</span>
+                  </div>
+
+                  <div className="space-y-2 mb-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-400">NGN</span>
+                      <span className="font-bold text-[#00D4AA]">
+                        {property.priceNgn}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-400">USD</span>
+                      <span className="font-bold text-[#FFD700]">
+                        {property.priceUsd}
+                      </span>
+                    </div>
+                  </div>
+
                   <button
                     onClick={
-                      prop.soon || prop.tokenized
-                        ? () => setIsModalOpen(true)
-                        : openWhatsApp
+                      property.soon ? () => setIsModalOpen(true) : openWhatsApp
                     }
-                    className="flex items-center gap-2 text-sm font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
+                    className="w-full py-2 px-4 bg-[#00D4AA] text-black font-semibold rounded-lg hover:bg-[#00D4AA]/90 transition-all duration-300"
                   >
-                    {prop.soon || prop.tokenized ? "Pre-Register" : "Inquire"}{" "}
-                    <ArrowRight size={16} />
+                    {property.soon ? "Coming Soon" : "Inquire Now"}
                   </button>
                 </div>
               </motion.div>
             ))}
           </div>
-
-          <div className="text-center mt-12">
-            <div className="inline-flex items-center gap-4 bg-white/5 border border-white/10 px-4 py-2 rounded-full backdrop-blur-md">
-              <span
-                className={`text-xs font-bold transition-colors ${isNaira ? "text-emerald-400" : "text-gray-500"}`}
-              >
-                NGN
-              </span>
-              <button
-                onClick={() => setIsNaira(!isNaira)}
-                className="w-12 h-6 bg-gray-700 rounded-full relative p-1"
-              >
-                <div
-                  className={`w-4 h-4 bg-emerald-500 rounded-full transition-all ${isNaira ? "translate-x-0" : "translate-x-6"}`}
-                />
-              </button>
-              <span
-                className={`text-xs font-bold transition-colors ${!isNaira ? "text-emerald-400" : "text-gray-500"}`}
-              >
-                USD
-              </span>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Blockchain Section */}
-      <section id="blockchain" className="relative z-10 py-24 px-6 bg-black/20">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-8">
-              Why{" "}
-              <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                Blockchain Properties?
-              </span>
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="bg-gradient-to-r from-[#00D4AA]/10 to-[#FFD700]/10 border border-[#00D4AA]/30 rounded-2xl p-8 sm:p-12"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              Why Blockchain Properties?
             </h2>
-            <p className="text-gray-400 text-lg leading-relaxed mb-10">
-              Traditional real estate is slow, opaque, and fragmented. XM Real
-              Estate integrates blockchain technology to bring transparency,
-              fractional ownership, and instant liquidity to luxury property
-              investments in Nigeria.
-            </p>
-            <div className="space-y-6">
-              {[
-                {
-                  title: "Tokenized Ownership",
-                  desc: "Own a fraction of premium Abuja properties from ₦500K",
-                },
-                {
-                  title: "On-Chain Verification",
-                  desc: "Every deed and transaction immutably recorded",
-                },
-                {
-                  title: "Instant Liquidity",
-                  desc: "Trade property tokens seamlessly on partner platforms",
-                },
-              ].map((item, i) => (
-                <div key={i} className="flex gap-4">
-                  <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0 mt-1">
-                    <Check className="w-4 h-4 text-emerald-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-white mb-1">{item.title}</h4>
-                    <p className="text-gray-400 text-sm">
-                      {item.desc}{" "}
-                      <span className="text-yellow-500/80 text-[10px] font-bold uppercase ml-2 px-2 py-0.5 border border-yellow-500/30 rounded-full">
-                        Coming Soon
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+            <ul className="space-y-4 text-gray-300">
+              <li className="flex gap-3">
+                <Check className="text-[#00D4AA] flex-shrink-0 mt-1" />
+                <span>Transparent ownership records on immutable ledgers</span>
+              </li>
+              <li className="flex gap-3">
+                <Check className="text-[#00D4AA] flex-shrink-0 mt-1" />
+                <span>24/7 global market access and fractional ownership</span>
+              </li>
+              <li className="flex gap-3">
+                <Check className="text-[#00D4AA] flex-shrink-0 mt-1" />
+                <span>Instant settlement and reduced transaction costs</span>
+              </li>
+              <li className="flex gap-3">
+                <Check className="text-[#00D4AA] flex-shrink-0 mt-1" />
+                <span>Smart contract compliance and automated conditions</span>
+              </li>
+            </ul>
+          </motion.div>
+        </div>
+      </section>
 
-          <div className="bg-white/5 border border-white/10 rounded-[32px] p-8 relative overflow-hidden backdrop-blur-xl shadow-2xl">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 blur-[60px] rounded-full" />
-            <div className="space-y-6 relative z-10">
-              {[
-                { label: "Blockchain Network", value: "Polygon (MATIC)" },
-                { label: "Token Standard", value: "ERC-721 / ERC-20" },
-                { label: "Smart Contract", value: "Audited & Verified" },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="flex justify-between items-center p-5 bg-white/5 border border-white/10 rounded-2xl"
-                >
-                  <div>
-                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">
-                      {item.label}
-                    </p>
-                    <p className="text-lg font-bold text-white">{item.value}</p>
-                  </div>
-                  <span className="text-[9px] font-bold text-emerald-400 border border-emerald-400/30 px-2 py-1 rounded-full uppercase">
-                    Locked
-                  </span>
-                </div>
-              ))}
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-gray-400 font-bold text-sm hover:bg-white/10 transition-all flex justify-between px-6"
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-black/50">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              How to Get Started
+            </h2>
+            <p className="text-gray-300 text-lg">
+              Join thousands of investors in blockchain real estate
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                step: "01",
+                title: "Verify Your Details",
+                desc: "Complete KYC verification to access exclusive opportunities",
+              },
+              {
+                step: "02",
+                title: "Choose Your Property",
+                desc: "Browse our curated selection of tokenized properties",
+              },
+              {
+                step: "03",
+                title: "Own On-Chain",
+                desc: "Complete your purchase and receive digital deed",
+              },
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                className="text-center"
               >
-                <span>View Smart Contract Explorer</span>
-                <span className="text-yellow-500">Coming Soon</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Academy Section */}
-      <section id="academy" className="relative z-10 py-24 px-6">
-        <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#122538] to-[#0A1929] border border-yellow-500/20 rounded-[40px] p-12 text-center relative overflow-hidden">
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-yellow-500/5 blur-[80px] rounded-full" />
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 relative z-10">
-            Powered by{" "}
-            <span className="text-yellow-400">XM Trading Academy</span>
-          </h2>
-          <p className="text-gray-400 text-lg mb-10 relative z-10">
-            Learn Crypto. Build Skills. Trade Smarter. Now applied to Real World
-            Assets.
-          </p>
-          <a
-            href="https://xmacademy.net"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-yellow-500/20 border border-yellow-500/50 text-yellow-500 hover:bg-yellow-500 hover:text-black transition-all font-bold relative z-10"
-          >
-            Visit Trading Academy <ArrowRight size={18} />
-          </a>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section
-        id="contact"
-        className="relative z-10 py-24 px-6 border-t border-white/10"
-      >
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
-          <div>
-            <h3 className="font-display text-4xl font-bold mb-6">
-              Ready to Own the Future?
-            </h3>
-            <p className="text-gray-400 text-lg leading-relaxed mb-10">
-              Connect with our Abuja-based investment team. Secure allocations,
-              blockchain verification, and premium property tours.
-            </p>
-            <div className="space-y-8">
-              {[
-                { icon: MapPin, text: "Abuja, Nigeria (Headquarters)" },
-                { icon: Mail, text: "invest@xmrealestate.ng" },
-                { icon: Phone, text: "+234 903 850 7913" },
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400">
-                    <item.icon size={24} />
-                  </div>
-                  <span className="text-lg text-gray-300 font-medium">
-                    {item.text}
-                  </span>
+                <div className="text-5xl font-bold text-[#00D4AA] mb-4">
+                  {item.step}
                 </div>
-              ))}
-            </div>
+                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                <p className="text-gray-400">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          <form
-            onSubmit={handleFormSubmit}
-            className="space-y-6 bg-white/5 border border-white/10 p-8 rounded-[32px] backdrop-blur-md"
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
           >
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">
-                  Full Name
-                </label>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+              Ready to Invest?
+            </h2>
+            <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+              Join our exclusive community of blockchain real estate investors.
+              Limited opportunities available.
+            </p>
+
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 max-w-2xl mx-auto">
+              <form onSubmit={handleFormSubmit} className="space-y-4">
                 <input
+                  type="text"
+                  placeholder="Full Name"
+                  className="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#00D4AA] transition-colors"
                   required
-                  placeholder="Your Name"
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white focus:border-emerald-500 outline-none transition-all"
                 />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">
-                  Email Address
-                </label>
                 <input
-                  required
                   type="email"
-                  placeholder="email@example.com"
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white focus:border-emerald-500 outline-none transition-all"
+                  placeholder="Email Address"
+                  className="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#00D4AA] transition-colors"
+                  required
                 />
-              </div>
+                <input
+                  type="tel"
+                  placeholder="WhatsApp Number"
+                  className="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#00D4AA] transition-colors"
+                  required
+                />
+                <select
+                  className="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg text-white focus:border-[#00D4AA] transition-colors"
+                  required
+                >
+                  <option>Select Investment Interest</option>
+                  <option>Residential</option>
+                  <option>Commercial</option>
+                  <option>Mixed-Use</option>
+                  <option>Not Sure</option>
+                </select>
+                <textarea
+                  placeholder="Message (Optional)"
+                  rows="4"
+                  className="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-[#00D4AA] transition-colors resize-none"
+                />
+                <button
+                  type="submit"
+                  disabled={inquiryMutation.isPending}
+                  className="w-full py-3 bg-gradient-to-r from-[#00D4AA] to-[#FFD700] text-black font-bold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+                >
+                  {inquiryMutation.isPending ? "Submitting..." : "Submit Inquiry"}
+                </button>
+              </form>
             </div>
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">
-                WhatsApp Number
-              </label>
-              <input
-                placeholder="+234 ..."
-                className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white focus:border-emerald-500 outline-none transition-all"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">
-                Investment Interest
-              </label>
-              <select
-                required
-                defaultValue=""
-                className="w-full bg-[#0A1929] border border-white/10 rounded-2xl px-5 py-4 text-white focus:border-emerald-500 outline-none transition-all appearance-none cursor-pointer"
-              >
-                <option value="" disabled>
-                  Select Interest
-                </option>
-                <option>4-Bed Semi-Detached Duplex</option>
-                <option>Executive Terraces</option>
-                <option>Blockchain Villa (Asokoro)</option>
-                <option>Token Allocation (Fractional Ownership)</option>
-                <option>Academy Partnership</option>
-              </select>
-            </div>
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">
-                Message (Optional)
-              </label>
-              <textarea
-                placeholder="Your message..."
-                className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white focus:border-emerald-500 outline-none transition-all min-h-[120px] resize-none"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={inquiryMutation.isPending}
-              className="w-full py-5 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-700 text-white font-bold text-lg hover:shadow-xl hover:shadow-emerald-600/20 transition-all disabled:opacity-50"
-            >
-              {inquiryMutation.isPending ? "Submitting..." : "Submit Inquiry"}
-            </button>
-          </form>
+          </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="relative z-10 py-12 px-6 text-center border-t border-white/10 bg-black/20">
-        <p className="text-gray-500 font-medium">
-          © 2026 XM Real Estate & Properties. All rights reserved.
-        </p>
-        <p className="mt-2 text-xs text-gray-600 uppercase tracking-widest font-bold">
-          Verified on Polygon • Built for Nigeria's Future
-        </p>
+      <ComingSoonModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+
+      <footer className="border-t border-gray-800 py-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div>
+            <h4 className="font-bold mb-4">Company</h4>
+            <ul className="space-y-2 text-gray-400 text-sm">
+              <li>
+                <a href="#" className="hover:text-[#00D4AA]">
+                  About
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#00D4AA]">
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#00D4AA]">
+                  Careers
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-bold mb-4">Support</h4>
+            <ul className="space-y-2 text-gray-400 text-sm">
+              <li>
+                <a href="#" className="hover:text-[#00D4AA]">
+                  Help Center
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#00D4AA]">
+                  Contact
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#00D4AA]">
+                  FAQ
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-bold mb-4">Legal</h4>
+            <ul className="space-y-2 text-gray-400 text-sm">
+              <li>
+                <a href="#" className="hover:text-[#00D4AA]">
+                  Privacy
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#00D4AA]">
+                  Terms
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-bold mb-4">Follow</h4>
+            <ul className="space-y-2 text-gray-400 text-sm">
+              <li>
+                <a href="#" className="hover:text-[#00D4AA]">
+                  Twitter
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#00D4AA]">
+                  Discord
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-[#00D4AA]">
+                  Telegram
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
+          <p>
+            &copy; 2024 XM Real Estate. All rights reserved. Blockchain-powered
+            real estate investing.
+          </p>
+        </div>
       </footer>
 
-      {/* WhatsApp Float */}
-      <div className="fixed bottom-8 right-8 z-[9997]">
-        <button
-          onClick={openWhatsApp}
-          className="flex items-center gap-3 px-6 py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-2xl shadow-emerald-600/40 transition-all hover:scale-110 active:scale-95 group"
-        >
-          <MessageCircle
-            size={24}
-            className="group-hover:rotate-12 transition-transform"
-          />
-          <span className="font-bold text-sm tracking-wide">
-            Chat with Team
-          </span>
-        </button>
-      </div>
+      <button
+        onClick={openWhatsApp}
+        className="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-[#00D4AA] to-[#FFD700] text-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50 flex items-center gap-2"
+      >
+        <span className="font-bold text-sm tracking-wide">
+          Chat with Team
+        </span>
+      </button>
 
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
