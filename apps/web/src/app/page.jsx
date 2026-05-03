@@ -191,9 +191,9 @@ export default function RealEstatePage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="font-display text-[clamp(2.5rem,8vw,6rem)] leading-[1.1] font-bold max-w-5xl mb-8"
+          className="font-display text-[clamp(2.25rem,7.2vw,5.4rem)] leading-[1.1] font-bold max-w-5xl mb-8"
         >
-          <span className="block">Blockchain Properties</span>
+          <span className="block whitespace-nowrap">Blockchain Properties</span>
           <span className="bg-gradient-to-r from-[#00D4AA] via-[#00FFD0] to-[#FFD700] bg-clip-text text-transparent">
             Reimagining Ownership
           </span>
