@@ -52,4 +52,3 @@ timeoutMs = 120000
 [userenv]
 
 [userenv.shared]
-GITHUB_TOKEN = "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"
