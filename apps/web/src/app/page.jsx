@@ -24,7 +24,7 @@ const properties = [
   {
     id: 1,
     title: "Semi-Detached Duplex",
-    gradient: "from-[#0d2137] via-[#122538] to-[#0a1929]",
+    image: "/properties/duplex.png",
     tag: "Verified",
     beds: 4,
     location: "Abuja Central",
@@ -35,7 +35,7 @@ const properties = [
   {
     id: 2,
     title: "Executive Terraces",
-    gradient: "from-[#0d1f33] via-[#0a2040] to-[#0A1929]",
+    image: "/properties/terraces.png",
     tag: "Coming Soon",
     beds: 5,
     location: "Maitama District",
@@ -47,7 +47,7 @@ const properties = [
   {
     id: 3,
     title: "Blockchain Villa",
-    gradient: "from-[#0d2137] via-[#0d1f33] to-[#061220]",
+    image: "/properties/villa.png",
     tag: "Tokenized",
     beds: 6,
     location: "Asokoro Layout",
@@ -300,13 +300,16 @@ export default function RealEstatePage() {
                 className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[24px] p-6 group hover:border-emerald-500/30 transition-all cursor-pointer"
               >
                 {/* Property Image Area */}
-                <div className={`h-48 bg-gradient-to-br ${prop.gradient} rounded-2xl mb-6 border border-white/5 group-hover:border-emerald-500/20 transition-colors overflow-hidden relative`}>
-                  <div className="absolute inset-0 flex items-end p-4">
-                    <div className="w-full h-[1px] bg-gradient-to-r from-emerald-500/30 via-[#00D4AA]/20 to-transparent" />
-                  </div>
-                  <div className="absolute top-4 right-4 w-8 h-8 rounded-full border border-emerald-500/20 flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-emerald-400/60" />
-                  </div>
+                <div className="h-48 rounded-2xl mb-6 border border-white/5 group-hover:border-emerald-500/20 transition-colors overflow-hidden relative">
+                  <motion.img
+                    src={prop.image}
+                    alt={prop.title}
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.07 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A1929]/80 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/0 to-emerald-500/0 group-hover:from-emerald-500/10 group-hover:to-transparent transition-all duration-500 pointer-events-none" />
                 </div>
 
                 <div className="flex justify-between items-start mb-2">
