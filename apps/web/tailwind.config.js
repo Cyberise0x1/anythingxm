@@ -1394,6 +1394,7 @@ module.exports = {
                                 'song-myung': 'Song Myung',
                                 sono: 'Sono',
                                 'sonsie-one': 'Sonsie One',
+                                sora: 'Sora',
                                 'sorts-mill-goudy': 'Sorts Mill Goudy',
                                 'source-code-pro': 'Source Code Pro',
                                 'source-sans-3': 'Source Sans 3',
