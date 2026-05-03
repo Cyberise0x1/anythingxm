@@ -65,11 +65,21 @@ fs.writeFileSync(
   JSON.stringify({ runtime: 'nodejs22.x', handler: 'index.js', launcherType: 'Nodejs' }, null, 2)
 );
 
-const serverEntry = path.join(serverBuild, 'index.js');
+const vercelEntry = path.join(__dirname, 'vercel-entry.mjs');
+const stubDir = path.join(__dirname, 'vercel-stubs');
 const funcOut = path.join(vercelOut, 'functions/index.func/index.js');
 console.log('Bundling server function...');
 execSync(
-  `bunx esbuild ${serverEntry} --bundle --platform=node --target=esnext --format=esm --external:argon2 --external:lightningcss --outfile=${funcOut}`,
+  [
+    'bunx esbuild', vercelEntry,
+    '--bundle --platform=node --target=esnext --format=esm',
+    `--banner:js="import{createRequire}from'module';const require=createRequire(import.meta.url);"`,
+    `--alias:argon2=${path.join(stubDir, 'argon2.mjs')}`,
+    `--alias:@hono/node-server=${path.join(stubDir, 'node-server.mjs')}`,
+    `--alias:@hono/node-server/serve-static=${path.join(stubDir, 'node-server-serve-static.mjs')}`,
+    '--external:lightningcss',
+    `--outfile=${funcOut}`,
+  ].join(' '),
   { stdio: 'inherit', cwd: webRoot }
 );
 
